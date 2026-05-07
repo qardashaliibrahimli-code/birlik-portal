@@ -260,7 +260,7 @@
 
         <div class="side-grid">
           <div class="panel stats">
-            <div class="stat"><strong>04+</strong><span>əsas bölmə</span></div>
+            <div class="stat"><strong>05+</strong><span>əsas bölmə</span></div>
             <div class="stat"><strong>∞</strong><span>məşq fürsətləri</span></div>
             <div class="stat"><strong>24/7</strong><span>aktiv portal</span></div>
             <div class="stat"><strong>HD</strong><span>vizual axın</span></div>
@@ -339,7 +339,16 @@
     const CORRECT_PASSWORD = 'brlk1234';
     let timerInterval = null;
 
-    // YENİ: RİYAZİYYAT SUALLARI (2 Dəqiqə)
+    // 1. RƏQƏMSAL BACARIQLAR (2 Dəqiqə)
+    const reqemsalSuallar = {
+      3: { sual: 'Lövhədə 1-dən 10-a qədər olan rəqəmlər yan-yana yazılıb: 1 2 3 4 5 6 7 8 9 10.<br><br>Siz bu ədədlərin arasına yalnız "+" və ya "-" işarələri qoya bilərsiniz. Hər hansı bir ədədi birləşdirmək olmaz, mütləq aralarında işarə olmalıdır.<br><br>Bu əməliyyatın yekun nəticəsinin tam olaraq 0 (sıfır) olma ehtimalı neçədir?', cavab: '<strong>Cavab:</strong> Ehtimal 0-dır.<br><br><strong>İzah:</strong> 1-dən 10-a qədər ədədlərin cəmi 55-dir. Bu tək ədəddir. Hər hansı "+" işarəsini "-" ilə əvəzlədikdə nəticə həmişə cüt ədəd qədər azalır. Tək ədəddən cüt ədəd çıxdıqda nəticə həmişə tək qalır. Sıfır (0) cüt ədəd olduğu üçün nəticənin 0 olma ehtimalı qətiyyən yoxdur.' },
+      4: { sual: 'Bir sinif otağında lövhəyə alt-alta 100 ədəd cümlə yazılıb:<br><br>1-ci cümlə: "Bu lövhədə tam olaraq 1 dənə yalan cümlə var."<br>2-ci cümlə: "Bu lövhədə tam olaraq 2 dənə yalan cümlə var."<br>...<br>100-cü cümlə: "Bu lövhədə tam olaraq 100 dənə yalan cümlə var."<br><br>Bu cümlələrdən hansı (və ya hansıları) mütləq şəkildə doğrudur?', cavab: '<strong>Cavab:</strong> Yalnız 99-cu cümlə doğrudur.<br><br><strong>İzah:</strong> Yalanların sayı konkret bir rəqəm olmalıdır, buna görə də bu fərqli cümlələrdən yalnız 1-i eyni anda doğru ola bilər. Əgər lövhədəki 1 cümlə doğrudursa, deməli yerdə qalan 99 cümlə yalandır. "Lövhədə 99 yalan var" iddiasını isə məhz 99-cu cümlə irəli sürür.' },
+      5: { sual: '16 nəfərlik böyük bir şahmat turnirində hər kəs bir-biri ilə tam olaraq 1 oyun oynayır. Qaydalara görə Qalib 1 xal, Heç-heçə 0.5 xal, Məğlub isə 0 xal alır. Turnirin sonunda lövhəyə baxdıqda məlum olur ki, bütün 16 oyunçu tam olaraq eyni xalı toplayıb.<br><br>Oyunu kənardan izləməyən bir hakim, sadəcə bu fakta əsaslanaraq dərhal deyir:<br>"Deməli, bu turnirdə ən azı 1 oyun mütləq heç-heçə bitib!"<br><br>Hakim heç bir oyunu görmədən bunu riyazi olaraq o an necə sübut etdi?', cavab: '<strong>Cavab:</strong> Oyunçuların ortalama xalının kəsrli alınması vasitəsilə.<br><br><strong>İzah:</strong> 16 nəfərlik turnirdə oynanılan oyunların sayı (16x15)/2 = 120 oyundur. Hər oyunda cəmi 1 xal paylanır. Hər kəs eyni xal toplayıbsa, hər bir oyunçuya 120 / 16 = 7.5 xal düşür. Xalın sonunda "0.5" olması oyunçunun ən azı bir oyunu mütləq heç-heçə bitirdiyini 100% sübut edir.' },
+      6: { sual: 'Qapalı bir torbanın içində 2026 ədəd Qırmızı və 2026 ədəd Qara top var. Siz torbadan eyni anda rastgələ 2 top çıxarırsınız.<br><br>• Eyni rəngdədirsə, torbaya 1 ədəd Qırmızı top atırsınız.<br>• Fərqli rəngdədirsə, torbaya 1 ədəd Qara top atırsınız.<br><br>Torbada yalnız 1 top qalana qədər proses davam edir. Torbada qalan ən sonuncu topun rəngi mütləq nə olacaq və niyə?', cavab: '<strong>Cavab:</strong> Mütləq Qırmızı olacaq.<br><br><strong>İzah:</strong> Qara topların sayı həmişə cüt-cüt (2-2) azalır (2 qara çıxanda 1 qırmızı qayıdır, 1 qara-1 qırmızı çıxanda 1 qara qayıdır). Başlanğıcda qara toplar cüt sayda (2026) olduğu üçün sonda heç vaxt tək sayda, yəni "1" qara top qala bilməz. Deməli qalan yeganə top Qırmızıdır.' },
+      7: { sual: 'A ədədi tam olaraq 100 ədəd 9 rəqəmindən ibarətdir: <br>A = 999...999<br><br>A² (A-nın kvadratı) ədədinin rəqəmləri cəmini tapın.', cavab: '<strong>Cavab:</strong> 900.<br><br><strong>İzah:</strong> Nümunələr: 9² = 81 (cəm 9), 99² = 9801 (cəm 18), 999² = 998001 (cəm 27). Qanunauyğunluğa əsasən, rəqəmlər cəmi doqquzların sayı vurulsun 9-dur. A ədədində 100 ədəd 9 olduğu üçün rəqəmlərin cəmi 100 × 9 = 900 edəcək.' }
+    };
+
+    // 2. RİYAZİYYAT VƏ MƏNTİQ (2 Dəqiqə)
     const riyaziyyatSuallar = {
       3: { sual: '100 tələbəlik bir qrupda sınaqlar keçirilir. Nəticələrə görə 90 nəfər Riyaziyyatdan, 80 nəfər Fizikadan, 75 nəfər Kimyadan, 70 nəfər isə Biologiyadan imtahandan keçməyi bacarıb.<br><br>Ən pis ehtimalı (minimumu) nəzərə alsaq, bu qrupda ən azı neçə tələbə mütləq şəkildə bütün 4 imtahandan da keçib? (Dəqiq rəqəm yazın)', cavab: '<strong>Cavab:</strong> 15 nəfər.<br><br><strong>İzah (Aha!):</strong> İmtahandan "keçənləri" yox, "kəsilənləri" hesablayın. Riyaziyyatdan 10, Fizikadan 20, Kimyadan 25, Biologiyadan 30 nəfər kəsilib. Ən pis ehtimal olaraq fərz etsək ki, kəsilən adamların hərəsi fərqli bir insandır, maksimum kəsilən sayı 10+20+25+30 = 85 nəfər edər. Yerdə qalan 100 - 85 = 15 nəfər mütləq şəkildə hər 4 imtahandan keçənlərdir!' },
       4: { sual: 'Aralarındakı məsafə düz 100 km olan iki qatar eyni rels üzrə bir-birinə doğru, hər biri sabit 50 km/saat sürətlə hərəkət edir. Bir milçək isə 75 km/saat sürətlə qatarların birinin burnundan çıxıb digərinə, qatarlar toqquşana qədər dayanmadan o yan-bu yana uçur.<br><br>Milçək iki qatar arasında toqquşma anına qədər ümumilikdə neçə kilometr məsafə uçmuş olar?', cavab: '<strong>Cavab:</strong> 75 km.<br><br><strong>İzah (Aha!):</strong> Məsələyə məsafə yox, zaman prizmasından baxın. Qatarların hər biri 50 km/s sürətlə 100 km-lik (50+50) məsafəni bağlamaq üçün tam olaraq 1 saat hərəkət edəcəklər. Deməli, milçəyin havada uçmaq üçün düz 1 saat vaxtı var. Milçəyin sürəti 75 km/saat olduğu üçün o, 1 saat ərzində hara uçmasından asılı olmayaraq düz 75 km qət edəcək.' },
@@ -348,7 +357,7 @@
       7: { sual: 'İki stəkan var: birində 100 ml qara kofe, digərində 100 ml təmiz süd. Bir xörək qaşığı götürüb süddən kofeyə qatırsınız və qarışdırırsınız. Sonra eyni qaşıqla həmin yeni qarışıqdan bir qaşıq dolusu götürüb yenidən süd olan stəkana qaytarırsınız.<br><br>Bu əməliyyatın sonunda kofenin içindəki süd daha çoxdur, yoxsa südün içindəki kofe?', cavab: '<strong>Cavab:</strong> Tamamilə bərabərdir!<br><br><strong>İzah (Aha!):</strong> Tənliyə ehtiyac yoxdur. Prosesin sonunda hər iki stəkanda yenə də tərəzi ilə ölçülmüş kimi düz 100 ml maye var. Deməli, Kofe stəkanından kənara nə qədər kofe çıxıb əskik qalıbsa, onun yerini tamamilə o qədər süd tutub. Və həmin o "əskik kofe" mütləq digər stəkandadır. Yəni yerdəyişmə 1:1 nisbətindədir, miqdarlar bərabərdir.' }
     };
 
-    // HUMANİTAR ELMLƏR (1 Dəqiqə)
+    // 3. HUMANİTAR ELMLƏR (1 Dəqiqə)
     const humanitarSuallar = {
       3: { sual: 'Səfəvi hökmdarı Şah I Təhmasib 1555-ci ildə dövlətin paytaxtını uzun müddət əsas mərkəz olmuş Təbriz şəhərindən Qəzvinə köçürdü. Təbriz həm iqtisadi, həm də mədəni baxımdan Qəzvindən qat-qat inkişaf etmiş və strateji bir şəhər idi.<br><br>Sırf hərbi-coğrafi məntiqə əsaslanaraq, dövlətin bu qərarı verməsindəki əsas məqsəd nə idi?', cavab: '<strong>Cavab:</strong> Təbrizin Osmanlı sərhədinə çox yaxın olması.<br><br><strong>İzah:</strong> Çaldıran döyüşündən sonra Osmanlı ordusu dəfələrlə Təbrizi işğal etmişdi. Şah Təhmasib paytaxtı ölkənin daxilinə (Qəzvinə) çəkməklə, Osmanlı hücumu zamanı əlavə vaxt qazanmaq və qoşun toplamaq üçün strateji məsafə yaratmışdı.' },
       4: { sual: '1944-cü ildə Müttəfiq qoşunları Normandiyaya (Fransa) çıxarmazdan əvvəl, İngiltərənin başqa bir sahil bölgəsində rezin və taxtadan hazırlanmış minlərlə "saxta tank və təyyarə" yerləşdirdilər. Alman kəşfiyyat təyyarələrinin bu saxta ordunu görməsinə bilərəkdən şərait yaradılırdı.<br><br>Müttəfiqlərin bu nəhəng vizual illüziya ilə almanlara etmək istədiyi əsas hərbi-məntiqi hiylə nə idi?', cavab: '<strong>Cavab:</strong> Alman ordusunun əsas qüvvələrini yanlış istiqamətə cəlb etmək.<br><br><strong>İzah:</strong> İngilislər almanları inandırmaq istəyirdilər ki, əsas hücum başqa yerdən olacaq. Almanlar bu illüziyaya inandılar və ən güclü diviziyalarını başqa yerdə saxladılar. Nəticədə Müttəfiqlər Normandiyada daha zəif müqavimətlə qarşılaşdılar.' },
@@ -357,7 +366,7 @@
       7: { sual: '1918-ci il mayın 28-də Azərbaycan Xalq Cümhuriyyətinin İstiqlal Bəyannaməsi qəbul edildi. Lakin bu mühüm tarixi hadisə Azərbaycanın indiki hüdudları daxilində deyil, qonşu ölkənin şəhəri olan Tiflisdə (Gürcüstan) baş tutdu.<br><br>O dövrün siyasi və hərbi reallığına əsaslanaraq, Azərbaycan hökumətinin niyə öz müstəqilliyini xarici bir şəhərdə elan etməyə məcbur olduğunu necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> Bakının daşnak-bolşevik qüvvələrinin işğalı altında olması.<br><br><strong>İzah:</strong> 1918-ci ilin mayında Bakı da daxil olmaqla şərq bölgələri Stepan Şaumyanın başçılıq etdiyi Bakı XKS-nin nəzarətində idi. Təhlükəsiz mərkəz olmadığı üçün Zaqafqaziya Seyminin dağıldığı yer olan Tiflisdə müstəqillik elan edildi.' }
     };
 
-    // MƏDƏNİYYƏT VƏ İNCƏSƏNƏT (1.5 Dəqiqə)
+    // 4. MƏDƏNİYYƏT VƏ İNCƏSƏNƏT (1.5 Dəqiqə)
     const incesenetSuallar = {
       3: { sual: 'Azərbaycanın qədim xalçaçılıq ənənələrində dahi ustadlar ən mükəmməl simmetrik naxışları toxuyarkən bəzən xalçanın kənarında bilərəkdən kiçik bir "səhv" (məsələn, naxışın əyri olması, bir ilmənin fərqli rəngdə vurulması) edirdilər.<br><br>Mükəmməlliyə can atan sənətkarın öz şah əsərində niyə qəsdən və bilərəkdən qüsur yaratdığını fəlsəfi olaraq necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> "Yalnız Yaradan mükəmməldir" inancına görə.<br><br><strong>İzah:</strong> İslam və Şərq fəlsəfəsinə görə mütləq mükəmməllik ancaq Allaha məxsusdur. İnsan öz yaratdığı əsərin qüsursuz olması iddiyasına düşməmək və təkəbbürdən uzaq olmaq üçün xalçaya bilərəkdən kiçik "noksan" qatırdı.' },
       4: { sual: 'İtalyan dahi Mikelancelonun məşhur "David" heykəlinə yaxından baxdıqda onun başı və sağ əli bədəninə nisbətdə qeyri-təbii dərəcədə böyük və kobud görünür. İnsan anatomiyasını sümük-sümük bilən Mikelancelo niyə belə bir aşkar "anatomik səhv"ə yol vermişdi?<br><br>Heykəlin ilkin dizayn məqsədinə və fizikanın optika qanunlarına əsaslanaraq bu qeyri-mütənasibliyin səbəbini tapın.', cavab: '<strong>Cavab:</strong> Perspektiv və optik illüziya.<br><br><strong>İzah:</strong> "David" heykəli yerdə deyil, kilsənin çox hündür damının kənarına yerləşdirilmək üçün sifariş edilmişdi. Optika qanunlarına görə uzaqda/yuxarıda olan obyektin yuxarı hissələri kiçik görünür. Mikelancelo bucaq distorsiyasını hesablamış, aşağıdan baxanda normal görünməsi üçün başı və əli qəsdən böyük yonmuşdu.' },
@@ -366,18 +375,13 @@
       7: { sual: '1908-ci ildə Üzeyir Hacıbəyov "Leyli və Məcnun" ilə Müsəlman Şərqində ilk operanı səhnəyə qoydu. Lakin bu əsərdə Avropa operaları üçün mütləq sayılan ənənəvi "klassik ariya" ifaları yox idi. Əvəzində aktyorlar səhnədə sırf "Muğam" oxuyurdular.<br><br>Üzeyir bəy mükəmməl Avropa təhsili almasına baxmayaraq, niyə klassik vokal ifalardan imtina edib Muğamdan istifadə etməyə məcbur olmuşdu?', cavab: '<strong>Cavab:</strong> Yerli tamaşaçını öyrəşdirmək və vokal ifaçı yoxluğu.<br><br><strong>İzah:</strong> Birincisi, Şərqdə Avropa üslubunda oxuya bilən opera müğənniləri yox idi. İkincisi, o bilirdi ki, muğama öyrəşmiş yerli tamaşaçı klassik ariyaları dərhal qəbul etməyəcək. O, "keçid" yaradaraq Avropa teatr səhnəsini doğma səslərlə (Muğam) birləşdirdi.' }
     };
 
-    // TƏBİƏT ELMLƏRİ (2 Dəqiqə)
+    // 5. TƏBİƏT ELMLƏRİ (2 Dəqiqə)
     const tebietSuallar = {
       3: { sual: 'Yorğun olanda kofe içirik və yuxumuz qaçır. Halbuki bioloji və kimyəvi olaraq kofein bədənə qətiyyən heç bir yeni enerji (kalori və ya ATP) vermir.<br><br>Bədənə heç bir enerji verməyən kofein, bizi bioloji olaraq necə "oyaq" saxlayır və yorğunluğumuzu aradan qaldırır? Kofeinin beynimizdə bağlandığı xüsusi kimyəvi maddənin adını və ya prosesi qeyd edin.', cavab: '<strong>Cavab:</strong> Kofein beyindəki "Adenozin" reseptorlarını bloklayır.<br><br><strong>İzah:</strong> İnsan oyaq qaldıqca beyində yorğunluq siqnalı verən "adenozin" adlı maddə toplanır. Kofeinin molekulyar quruluşu adenozinə o qədər bənzəyir ki, o, əsl adenozindən tez davranıb həmin reseptorlara yapışır. Beyin yorğunluq siqnalını oxuya bilmədiyi üçün bədən yorğun olmadığını zənn edir.' },
       4: { sual: 'Yağış yağarkən asfalt, torpaq və ya geydiyimiz hər hansı bir paltar islananda gözümüzə dərhal daha tünd (qara) rəngdə görünür. Halbuki təmiz su tamamilə şəffafdır və heç bir rəngi yoxdur.<br><br>Rəngsiz suyun toxunduğu səthi qaranlıq göstərməsinin arxasındakı əsas fiziki-optik qanunun/səbəbin adını yazın.', cavab: '<strong>Cavab:</strong> Sınma və Daxili İnikas (İşığın suyun daxilində tələyə düşməsi).<br><br><strong>İzah:</strong> Quru kələ-kötür səth işığı hər tərəfə yaxşı əks etdirir (açıq görünür). Su səthi isladaraq hamarlaşdırdıqda, işıq suyun içindən keçir, lakin geri qayıdarkən dəfələrlə qırılaraq su təbəqəsi daxilində udulur. Gözümüzə daha az işıq çatdığı üçün səth daha tünd görünür.' },
       5: { sual: 'Çox acı bir bibər yedikdə ağzımız qovrulur və yanır. İnsanların ilk reaksiyası dərhal bir stəkan su içmək olur. Lakin su içmək acını kəsmək əvəzinə onu bütün ağzımıza yayır və vəziyyəti daha da pisləşdirir. Amma süd içmək yanğını saniyələr içində söndürür.<br><br>Acını yaradan maddənin xüsusiyyəti nədir ki, su onu yumaq əvəzinə yayır, süddəki hansı maddə isə onu yuyub apara bilir?', cavab: '<strong>Cavab:</strong> Bibərdəki kapsaisin maddəsi "hidrofob"dur (suda həll olmur), süddəki kazein zülalı isə onu yuyur.<br><br><strong>İzah:</strong> Kapsaisin yağlı bir maddədir, su ilə qarışmır (suyun üstündəki yağ kimi), sadəcə ağızda başqa yerlərə sürüşüb yanğını yayır. Süddəki "kazein" adlı zülal isə sabun rolunu oynayır, kapsaisini ağuşuna alıb reseptorlardan ayırır və mədəyə aparır.' },
       6: { sual: 'Mikrodalğalı sobaya (mikrovolnovkaya) yemək qoymaq təhlükəsizdir, lakin yeməyin içində səhvən kiçik bir metal çəngəl unutsanız, sobanı işə salan kimi dərhal qığılcımlar çaxmağa və partlayış yaranmağa başlayır.<br><br>Dalğalar yeməyi sakitcə isidə bildiyi halda, metala (xüsusilə iti uclu çəngələ) dəydikdə niyə aqressiv qığılcımlar yaradır? Metalda fərqli olan əsas fiziki amil nədir?', cavab: '<strong>Cavab:</strong> Metaldakı sərbəst elektronların hərəkətə gəlib "Elektrik qövsü" yaratması.<br><br><strong>İzah:</strong> Metalların daxilindəki sərbəst elektronlar mikrodalğanın təsiri ilə şiddətli hərəkətə (cərəyana) gəlirlər. Çəngəlin dişləri kimi iti uclarda bu elektronlar həddindən artıq sıxışır və havaya sıçrayaraq şimşək (elektrik qövsü) effekti yaradırlar.' },
       7: { sual: 'Gündəlik həyatda isti və ya ilıq duş qəbul edərkən, duş kabinasının (və ya vannanın) polietilen pərdəsi həmişə havalanaraq içəriyə, yəni birbaşa sizin bədəninizə doğru yapışmağa çalışır. Halbuki aşağı axan su havanı çölə itələməlidir.<br><br>İsti su axarkən pərdəni israrla içəriyə doğru çəkən bu təzyiq fərqinin yaranmasına səbəb olan əsas fizika qanununun adını (və ya səbəbini) yazın.', cavab: '<strong>Cavab:</strong> Bernoulli prinsipi (və isti havanın yuxarı qalxması).<br><br><strong>İzah:</strong> İsti su havanı isidir və isti hava yuxarı qalxaraq aşağıda alçaq təzyiq zonası yaradır. Eyni zamanda su damcıları aşağı düşərkən havanı da özü ilə aparıb sürətləndirir (Bernoulli prinsipinə görə sürəti artan havanın təzyiqi düşür). Çöldəki yüksək təzyiqli soyuq hava isə boşluğu doldurmaq üçün pərdəni içəri doğru itələyir.' }
-    };
-
-    // RƏQƏMSAL BACARIQLAR KÖHNƏ SUALLARI DA RƏQƏMSAL QİSMİNDƏ (Sizi çaşdırmasın, "reqemsalSuallar2" adlı obyektdə saxladım köhnələri. Amma SİZ riyaziyyat istədiniz).
-    const reqemsalSuallar2 = {
-      3: { sual: 'Lövhədə 1-dən 10-a qədər olan rəqəmlər yan-yana yazılıb... ', cavab: 'Ehtimal 0-dır.' }, // vs. (Gərək yoxdursa silə bilərsiniz, yuxarıda Rəqəmsal düymələrinə bu sualları bağlamışam)
     };
 
     function initPortal() {
@@ -450,6 +454,7 @@
         </div>
 
         <div class="category-row">
+          
           <div class="category">
             <h4>Riyaziyyat</h4>
             <div class="boxes">
@@ -486,11 +491,11 @@
           <div class="category">
             <h4>Rəqəmsal Bacarıqlar</h4>
             <div class="boxes">
-              <div class="box"><div class="score">3 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">4 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">5 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">6 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">7 bal</div><div class="label">Sual</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('reqemsal', 3)"><div class="score">3 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('reqemsal', 4)"><div class="score">4 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('reqemsal', 5)"><div class="score">5 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('reqemsal', 6)"><div class="score">6 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('reqemsal', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
 
@@ -504,6 +509,7 @@
               <div class="box clickable-box" onclick="openQuestionModal('incesenet', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
+
         </div>
       `;
       document.getElementById('modalFooter').innerHTML = `
@@ -523,6 +529,10 @@
       if (category === 'riyaziyyat') {
           qData = riyaziyyatSuallar[points];
           titleName = "RİYAZİYYAT VƏ MƏNTİQ";
+          timeLimit = 120; // 2 Dəqiqə
+      } else if (category === 'reqemsal') {
+          qData = reqemsalSuallar[points];
+          titleName = "RƏQƏMSAL BACARIQLAR";
           timeLimit = 120; // 2 Dəqiqə
       } else if (category === 'humanitar') {
           qData = humanitarSuallar[points];
