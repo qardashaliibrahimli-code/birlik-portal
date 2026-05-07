@@ -9,38 +9,19 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap');
 
     :root {
-      --bg0: #02040a;
-      --bg1: #07111f;
-      --bg2: #0b1d2f;
-      --card: rgba(7, 14, 26, 0.62);
-      --card-strong: rgba(8, 15, 30, 0.88);
-      --line: rgba(255,255,255,0.09);
-      --text: rgba(255,255,255,0.96);
+      --bg0: #02040a; --bg1: #07111f; --bg2: #0b1d2f;
+      --card: rgba(7, 14, 26, 0.62); --card-strong: rgba(8, 15, 30, 0.88);
+      --line: rgba(255,255,255,0.09); --text: rgba(255,255,255,0.96);
       --muted: rgba(226,232,240,0.70);
-      --green: #22c55e;
-      --cyan: #38bdf8;
-      --violet: #8b5cf6;
-      --gold: #fbbf24;
+      --green: #22c55e; --cyan: #38bdf8; --violet: #8b5cf6; --gold: #fbbf24;
       --shadow: 0 30px 80px rgba(0,0,0,0.48);
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --max: 1240px;
+      --radius-xl: 34px; --radius-lg: 26px; --max: 1240px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
+      min-height: 100vh; color: var(--text); font-family: 'Inter', sans-serif;
       background:
         radial-gradient(circle at 15% 20%, rgba(34,197,94,0.16), transparent 24%),
         radial-gradient(circle at 80% 15%, rgba(56,189,248,0.12), transparent 24%),
@@ -48,1022 +29,179 @@
         linear-gradient(160deg, var(--bg0), var(--bg1) 45%, var(--bg2));
       overflow-x: hidden;
     }
-
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-      background-size: 58px 58px;
-      opacity: 0.32;
-      mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 58px 58px; opacity: 0.32; mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
     }
 
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(8px);
-      opacity: 0.55;
-      pointer-events: none;
-      mix-blend-mode: screen;
-      z-index: 0;
-      animation: floaty 14s ease-in-out infinite;
-    }
+    .orb { position: fixed; border-radius: 50%; filter: blur(8px); opacity: 0.55; pointer-events: none; mix-blend-mode: screen; z-index: 0; animation: floaty 14s ease-in-out infinite; }
+    .orb.o1 { width: 240px; height: 240px; left: -90px; top: 12%; background: radial-gradient(circle, rgba(34,197,94,0.50), rgba(34,197,94,0.05) 68%, transparent 100%); }
+    .orb.o2 { width: 180px; height: 180px; right: 4%; top: 18%; background: radial-gradient(circle, rgba(56,189,248,0.44), rgba(56,189,248,0.04) 68%, transparent 100%); animation-delay: -4s; }
+    .orb.o3 { width: 300px; height: 300px; right: 12%; bottom: -120px; background: radial-gradient(circle, rgba(139,92,246,0.36), rgba(139,92,246,0.04) 70%, transparent 100%); animation-delay: -8s; }
+    @keyframes floaty { 0%,100% { transform: translateY(0) translateX(0) scale(1); } 50% { transform: translateY(-18px) translateX(12px) scale(1.04); } }
 
-    .orb.o1 {
-      width: 240px;
-      height: 240px;
-      left: -90px;
-      top: 12%;
-      background: radial-gradient(circle, rgba(34,197,94,0.50), rgba(34,197,94,0.05) 68%, transparent 100%);
-    }
-
-    .orb.o2 {
-      width: 180px;
-      height: 180px;
-      right: 4%;
-      top: 18%;
-      background: radial-gradient(circle, rgba(56,189,248,0.44), rgba(56,189,248,0.04) 68%, transparent 100%);
-      animation-delay: -4s;
-    }
-
-    .orb.o3 {
-      width: 300px;
-      height: 300px;
-      right: 12%;
-      bottom: -120px;
-      background: radial-gradient(circle, rgba(139,92,246,0.36), rgba(139,92,246,0.04) 70%, transparent 100%);
-      animation-delay: -8s;
-    }
-
-    @keyframes floaty {
-      0%,100% { transform: translateY(0) translateX(0) scale(1); }
-      50% { transform: translateY(-18px) translateX(12px) scale(1.04); }
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      width: min(var(--max), 92vw);
-      margin: 0 auto;
-    }
+    .wrap { position: relative; z-index: 1; width: min(var(--max), 92vw); margin: 0 auto; }
 
     /* LOGIN */
-    #login-screen {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(circle at center, rgba(15,23,42,0.78), rgba(2,6,23,0.98));
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      transition: opacity .8s ease, transform .8s ease;
-    }
-
-    .login-shell {
-      width: min(92vw, 470px);
-      padding: 36px;
-      border-radius: 34px;
-      background: linear-gradient(180deg, rgba(13,21,44,0.78), rgba(8,15,30,0.88));
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      animation: popIn .8s cubic-bezier(.2,.85,.2,1) both;
-    }
-
-    .login-shell::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(120deg, transparent 20%, rgba(34,197,94,0.12), rgba(56,189,248,0.12), transparent 80%);
-      transform: translateX(-60%);
-      animation: sheen 7s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes sheen {
-      from { transform: translateX(-60%); }
-      to { transform: translateX(60%); }
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(24px) scale(.97); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .brand-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.88rem;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 16px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fff, var(--green));
-      box-shadow: 0 0 16px rgba(34,197,94,0.75);
-    }
-
-    .login {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .login h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.7rem, 7vw, 4rem);
-      letter-spacing: 12px;
-      line-height: 1;
-      margin-bottom: 12px;
-      background: linear-gradient(180deg, #fff 0%, #d4ffe0 45%, #22c55e 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 24px rgba(34,197,94,0.14);
-    }
-
-    .login .sub {
-      color: var(--muted);
-      font-size: 1rem;
-      letter-spacing: 1px;
-      margin-bottom: 26px;
-      text-transform: uppercase;
-    }
-
-    .input-box {
-      margin-bottom: 14px;
-    }
-
-    .input-box input {
-      width: 100%;
-      padding: 16px 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-      font-size: 1.08rem;
-      text-align: center;
-      outline: none;
-      transition: .3s ease;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-
-    .input-box input::placeholder {
-      color: rgba(226,232,240,0.45);
-    }
-
-    .input-box input:focus {
-      border-color: rgba(34,197,94,0.5);
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 0 24px rgba(34,197,94,0.10);
-      transform: translateY(-1px);
-    }
-
-    .btn {
-      width: 100%;
-      padding: 14px 16px;
-      border: 0;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%);
-      color: #06111f;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 14px 34px rgba(34,197,94,0.22);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 18px 44px rgba(34,197,94,0.30);
-    }
-
-    #errorNote {
-      display: none;
-      margin-top: 14px;
-      color: #fca5a5;
-      font-weight: 600;
-    }
-
-    .hide-login {
-      opacity: 0 !important;
-      transform: translateY(-20px) scale(.98) !important;
-      pointer-events: none !important;
-    }
+    #login-screen { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at center, rgba(15,23,42,0.78), rgba(2,6,23,0.98)); backdrop-filter: blur(10px); z-index: 1000; transition: opacity .8s ease, transform .8s ease; }
+    .login-shell { width: min(92vw, 470px); padding: 36px; border-radius: 34px; background: linear-gradient(180deg, rgba(13,21,44,0.78), rgba(8,15,30,0.88)); border: 1px solid rgba(255,255,255,0.10); box-shadow: var(--shadow); overflow: hidden; position: relative; animation: popIn .8s cubic-bezier(.2,.85,.2,1) both; }
+    .login-shell::before { content: ""; position: absolute; inset: -2px; background: linear-gradient(120deg, transparent 20%, rgba(34,197,94,0.12), rgba(56,189,248,0.12), transparent 80%); transform: translateX(-60%); animation: sheen 7s linear infinite; pointer-events: none; }
+    @keyframes sheen { from { transform: translateX(-60%); } to { transform: translateX(60%); } }
+    @keyframes popIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .brand-pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-size: 0.88rem; position: relative; z-index: 1; margin-bottom: 16px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #fff, var(--green)); box-shadow: 0 0 16px rgba(34,197,94,0.75); }
+    .login { position: relative; z-index: 1; text-align: center; }
+    .login h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.7rem, 7vw, 4rem); letter-spacing: 12px; line-height: 1; margin-bottom: 12px; background: linear-gradient(180deg, #fff 0%, #d4ffe0 45%, #22c55e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 24px rgba(34,197,94,0.14); }
+    .login .sub { color: var(--muted); font-size: 1rem; letter-spacing: 1px; margin-bottom: 26px; text-transform: uppercase; }
+    .input-box { margin-bottom: 14px; }
+    .input-box input { width: 100%; padding: 16px 18px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04); color: #fff; font-size: 1.08rem; text-align: center; outline: none; transition: .3s ease; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+    .input-box input::placeholder { color: rgba(226,232,240,0.45); }
+    .input-box input:focus { border-color: rgba(34,197,94,0.5); box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 0 24px rgba(34,197,94,0.10); transform: translateY(-1px); }
+    .btn { width: 100%; padding: 14px 16px; border: 0; border-radius: 18px; background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%); color: #06111f; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; box-shadow: 0 14px 34px rgba(34,197,94,0.22); transition: transform .25s ease, box-shadow .25s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 18px 44px rgba(34,197,94,0.30); }
+    #errorNote { display: none; margin-top: 14px; color: #fca5a5; font-weight: 600; }
+    .hide-login { opacity: 0 !important; transform: translateY(-20px) scale(.98) !important; pointer-events: none !important; }
 
     /* MAIN */
-    #main-content {
-      display: none;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .85s ease, transform .85s ease;
-    }
+    #main-content { display: none; opacity: 0; transform: translateY(12px); transition: opacity .85s ease, transform .85s ease; }
+    .show-main { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
+    .navbar { margin-top: 18px; padding: 16px 18px; border-radius: 26px; background: rgba(4, 10, 22, 0.62); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px); box-shadow: 0 16px 36px rgba(0,0,0,0.22); display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .title { display: flex; align-items: center; gap: 14px; }
+    .title-badge { width: 54px; height: 54px; border-radius: 17px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(34,197,94,0.24), rgba(56,189,248,0.16)); border: 1px solid rgba(255,255,255,0.08); font-family: 'Orbitron', sans-serif; letter-spacing: 2px; box-shadow: 0 0 22px rgba(34,197,94,0.10); }
+    .title-text h2 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 4px; }
+    .title-text p { color: var(--muted); font-size: .95rem; }
+    .logos { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .logos img { height: 74px; border-radius: 18px; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); object-fit: contain; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; filter: drop-shadow(0 0 10px rgba(56,189,248,0.12)); }
+    .logos img:hover { transform: translateY(-4px) scale(1.05); border-color: rgba(34,197,94,0.25); box-shadow: 0 0 28px rgba(34,197,94,0.08); }
 
-    .show-main {
-      display: block !important;
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-    }
+    .hero { margin-top: 22px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; }
+    .panel { background: linear-gradient(180deg, rgba(9, 16, 33, 0.80), rgba(7, 13, 26, 0.60)); border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius-xl); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(34,197,94,0.08), rgba(56,189,248,0.08), transparent 80%); transform: translateX(-60%); animation: flow 9s linear infinite; pointer-events: none; }
+    @keyframes flow { to { transform: translateX(60%); } }
 
-    .navbar {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border-radius: 26px;
-      background: rgba(4, 10, 22, 0.62);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
+    .hero-card { padding: 36px; min-height: 320px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-size: .84rem; width: fit-content; margin-bottom: 18px; }
+    .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(34,197,94,.38); animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.38); } 70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+    .hero-card h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 6vw, 4.4rem); line-height: .98; letter-spacing: 5px; margin-bottom: 16px; }
+    .hero-card h1 .green { color: var(--green); text-shadow: 0 0 12px rgba(34,197,94,.50), 0 0 28px rgba(34,197,94,.25); }
+    .hero-card .desc { color: var(--muted); font-size: 1.08rem; line-height: 1.7; max-width: 62ch; }
+    .actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .solid-btn, .ghost-btn { border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 800; cursor: pointer; letter-spacing: 1px; transition: transform .25s ease, box-shadow .25s ease; }
+    .solid-btn { color: #04111f; background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%); box-shadow: 0 14px 30px rgba(34,197,94,0.22); }
+    .ghost-btn { color: #fff; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); }
+    .solid-btn:hover, .ghost-btn:hover { transform: translateY(-2px); }
 
-    .title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .title-badge {
-      width: 54px;
-      height: 54px;
-      border-radius: 17px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(34,197,94,0.24), rgba(56,189,248,0.16));
-      border: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 2px;
-      box-shadow: 0 0 22px rgba(34,197,94,0.10);
-    }
-
-    .title-text h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 4px;
-      margin-bottom: 4px;
-    }
-
-    .title-text p {
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    .logos {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .logos img {
-      height: 74px;
-      border-radius: 18px;
-      padding: 8px 10px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      object-fit: contain;
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-      filter: drop-shadow(0 0 10px rgba(56,189,248,0.12));
-    }
-
-    .logos img:hover {
-      transform: translateY(-4px) scale(1.05);
-      border-color: rgba(34,197,94,0.25);
-      box-shadow: 0 0 28px rgba(34,197,94,0.08);
-    }
-
-    .hero {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 20px;
-    }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(9, 16, 33, 0.80), rgba(7, 13, 26, 0.60));
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(115deg, transparent 20%, rgba(34,197,94,0.08), rgba(56,189,248,0.08), transparent 80%);
-      transform: translateX(-60%);
-      animation: flow 9s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes flow {
-      to { transform: translateX(60%); }
-    }
-
-    .hero-card {
-      padding: 36px;
-      min-height: 320px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: .84rem;
-      width: fit-content;
-      margin-bottom: 18px;
-    }
-
-    .pulse {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 0 rgba(34,197,94,.38);
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.38); }
-      70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
-      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
-    }
-
-    .hero-card h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 4.4rem);
-      line-height: .98;
-      letter-spacing: 5px;
-      margin-bottom: 16px;
-    }
-
-    .hero-card h1 .green {
-      color: var(--green);
-      text-shadow: 0 0 12px rgba(34,197,94,.50), 0 0 28px rgba(34,197,94,.25);
-    }
-
-    .hero-card .desc {
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.7;
-      max-width: 62ch;
-    }
-
-    .actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .solid-btn, .ghost-btn {
-      border: 0;
-      border-radius: 16px;
-      padding: 13px 18px;
-      font-weight: 800;
-      cursor: pointer;
-      letter-spacing: 1px;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .solid-btn {
-      color: #04111f;
-      background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%);
-      box-shadow: 0 14px 30px rgba(34,197,94,0.22);
-    }
-
-    .ghost-btn {
-      color: #fff;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .solid-btn:hover, .ghost-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .side-grid {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .stats {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .stat {
-      min-height: 118px;
-      border-radius: 22px;
-      padding: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .stat strong {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.65rem;
-      margin-bottom: 6px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: .98rem;
-    }
-
+    .side-grid { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
+    .stats { padding: 18px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .stat { min-height: 118px; border-radius: 22px; padding: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center; }
+    .stat strong { font-family: 'Orbitron', sans-serif; font-size: 1.65rem; margin-bottom: 6px; }
+    .stat span { color: var(--muted); font-size: .98rem; }
     .stat:nth-child(1) strong { color: #86efac; }
     .stat:nth-child(2) strong { color: #8ddcff; }
     .stat:nth-child(3) strong { color: #c4b5fd; }
     .stat:nth-child(4) strong { color: #fcd34d; }
-
-    .message {
-      padding: 22px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .message h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 4px;
-      color: var(--green);
-    }
-
-    .message p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .slider-wrap {
-      margin-top: 22px;
-      padding: 24px 0 34px;
-      overflow: hidden;
-      perspective: 1200px;
-      mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
-      -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
-    }
-
-    .track {
-      display: flex;
-      gap: 18px;
-      width: max-content;
-      animation: drift 30s linear infinite;
-      will-change: transform;
-    }
-
-    .slider-wrap:hover .track {
-      animation-play-state: paused;
-    }
-
-    .slide {
-      width: 340px;
-      height: 220px;
-      flex: 0 0 auto;
-      overflow: hidden;
-      border-radius: 28px;
-      position: relative;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.03);
-      box-shadow: 0 26px 60px rgba(0,0,0,0.42);
-      transform: perspective(1200px) rotateY(0deg) scale(.96);
-      transition: transform .55s ease, box-shadow .55s ease, border-color .55s ease;
-    }
-
-    .slide::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.35));
-      pointer-events: none;
-    }
-
-    .slide:hover {
-      transform: perspective(1200px) rotateY(-9deg) translateY(-10px) scale(1.06);
-      border-color: rgba(34,197,94,0.26);
-      box-shadow: 0 34px 82px rgba(0,0,0,0.62), 0 0 30px rgba(34,197,94,0.08);
-      z-index: 3;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1.03);
-      transition: transform .9s ease, filter .9s ease;
-      filter: saturate(1.05) contrast(1.03);
-    }
-
-    .slide:hover img {
-      transform: scale(1.13);
-      filter: saturate(1.18) contrast(1.08);
-    }
-
-    @keyframes drift {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-358px * 5)); }
-    }
-
-    .content-grid {
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      padding-bottom: 38px;
-    }
-
-    .cards-panel, .side-panel {
-      background: linear-gradient(180deg, rgba(9,16,33,0.80), rgba(7,13,26,0.62));
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      padding: 22px;
-      position: relative;
-    }
-
-    .cards-panel::before, .side-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(115deg, transparent 18%, rgba(34,197,94,0.06), rgba(56,189,248,0.06), transparent 82%);
-      transform: translateX(-60%);
-      animation: flow 10s linear infinite;
-      pointer-events: none;
-    }
-
-    .cards-panel h3, .side-panel h3 {
-      position: relative;
-      z-index: 1;
-      font-family: 'Orbitron', sans-serif;
-      color: #86efac;
-      letter-spacing: 4px;
-      font-size: 1.05rem;
-      margin-bottom: 16px;
-    }
-
-    .chip-row {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.09);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .selection-card {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      margin-bottom: 14px;
-      cursor: pointer;
-      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease;
-      overflow: hidden;
-    }
-
-    .selection-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent, rgba(34,197,94,0.08), transparent);
-      transform: translateX(-100%);
-      transition: transform .45s ease;
-    }
-
-    .selection-card:hover::before {
-      transform: translateX(100%);
-    }
-
-    .selection-card:hover {
-      transform: translateY(-3px);
-      background: rgba(34,197,94,0.08);
-      border-color: rgba(34,197,94,0.28);
-      box-shadow: 0 18px 30px rgba(0,0,0,0.22);
-    }
-
-    .selection-card img,
-    .locked-icon {
-      width: 68px;
-      height: 68px;
-      flex: 0 0 auto;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-    }
-
-    .locked-icon {
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.04);
-      font-size: 30px;
-    }
-
-    .selection-card .text {
-      position: relative;
-      z-index: 1;
-    }
-
-    .selection-card h4 {
-      font-size: 1.34rem;
-      margin-bottom: 4px;
-    }
-
-    .selection-card p {
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .locked {
-      opacity: .55;
-      cursor: not-allowed;
-      filter: grayscale(.15);
-    }
-
-    .locked:hover {
-      transform: none;
-      box-shadow: none;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .quiz-box {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 12px;
-    }
-
-    .quiz-item {
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      cursor: pointer;
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .quiz-item:hover {
-      transform: translateY(-2px);
-      border-color: rgba(34,197,94,0.25);
-      box-shadow: 0 16px 26px rgba(0,0,0,0.14);
-    }
-
-    .quiz-item strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-
-    .quiz-item span {
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .footer-note {
-      text-align: center;
-      color: rgba(226,232,240,0.52);
-      padding: 10px 0 18px;
-      font-size: .95rem;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(2,6,23,0.72);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1200;
-      padding: 18px;
-      backdrop-filter: blur(10px);
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-card {
-      width: min(94vw, 1180px);
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: linear-gradient(180deg, rgba(9,16,33,0.98), rgba(7,13,26,0.96));
-      box-shadow: var(--shadow);
-      padding: 24px;
-      max-height: 92vh;
-      overflow: auto;
-      animation: popIn .22s ease forwards;
-    }
-
-    .modal-header {
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    .modal-header h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2.4rem);
-      letter-spacing: 5px;
-      color: #86efac;
-      margin-bottom: 8px;
-    }
-
-    .modal-header p {
-      color: var(--muted);
-    }
-
-    .modal-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .modal-image-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
-      align-items: start;
-    }
-
-    .modal-image,
-    .mini-image {
-      width: 100%;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 24px 50px rgba(0,0,0,0.35);
-      background: rgba(255,255,255,0.03);
-    }
-
-    .mini-image {
-      max-width: 220px;
-      margin: 0 auto;
-      border-radius: 18px;
-      box-shadow: 0 16px 34px rgba(0,0,0,0.28);
-    }
-
-    .modal-image img,
-    .mini-image img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    .mini-image img {
-      height: 150px;
-    }
-
-    .modal-side h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: #86efac;
-      letter-spacing: 4px;
-      margin-bottom: 14px;
-      font-size: 1.15rem;
-    }
-
-    .members {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .member {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-weight: 600;
-    }
-
-    .race-section {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .race-section h4 {
-      font-family: 'Orbitron', sans-serif;
-      color: #8ddcff;
-      letter-spacing: 3px;
-      margin-bottom: 14px;
-      font-size: 1rem;
-    }
-
-    .race-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .race {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
-    }
-
-    .race:hover {
-      transform: translateY(-2px);
-      border-color: rgba(34,197,94,0.26);
-      box-shadow: 0 14px 24px rgba(0,0,0,0.18);
-    }
-
-    .category-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-    }
-
-    .category {
-      min-width: 0;
-      border-radius: 22px;
-      padding: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .category h4 {
-      font-size: 1rem;
-      line-height: 1.35;
-      text-align: center;
-      min-height: 52px;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    .boxes {
-      display: grid;
-      gap: 10px;
-    }
-
-    .box {
-      border-radius: 16px;
-      padding: 12px 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      text-align: center;
-    }
-
-    .box .score {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--green);
-      font-size: 1.08rem;
-      margin-bottom: 6px;
-      letter-spacing: 2px;
-    }
-
-    .box .label {
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .modal-footer {
-      margin-top: 18px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .close-btn {
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 16px;
-      background: linear-gradient(135deg, var(--green), #86efac);
-      color: #06111f;
-      font-weight: 800;
-      cursor: pointer;
-      min-width: 180px;
-    }
-
-    @media (max-width: 1180px) {
-      .category-row {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 980px) {
-      .hero,
-      .content-grid,
-      .modal-top {
-        grid-template-columns: 1fr;
-      }
-
-      .navbar {
-        flex-direction: column;
-      }
-    }
-
+    .message { padding: 22px 24px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+    .message h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; letter-spacing: 4px; color: var(--green); }
+    .message p { color: var(--muted); line-height: 1.7; }
+
+    .slider-wrap { margin-top: 22px; padding: 24px 0 34px; overflow: hidden; perspective: 1200px; mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent); }
+    .track { display: flex; gap: 18px; width: max-content; animation: drift 30s linear infinite; will-change: transform; }
+    .slider-wrap:hover .track { animation-play-state: paused; }
+    .slide { width: 340px; height: 220px; flex: 0 0 auto; overflow: hidden; border-radius: 28px; position: relative; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.03); box-shadow: 0 26px 60px rgba(0,0,0,0.42); transform: perspective(1200px) rotateY(0deg) scale(.96); transition: transform .55s ease, box-shadow .55s ease, border-color .55s ease; }
+    .slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.35)); pointer-events: none; }
+    .slide:hover { transform: perspective(1200px) rotateY(-9deg) translateY(-10px) scale(1.06); border-color: rgba(34,197,94,0.26); box-shadow: 0 34px 82px rgba(0,0,0,0.62), 0 0 30px rgba(34,197,94,0.08); z-index: 3; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.03); transition: transform .9s ease, filter .9s ease; filter: saturate(1.05) contrast(1.03); }
+    .slide:hover img { transform: scale(1.13); filter: saturate(1.18) contrast(1.08); }
+    @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-358px * 5)); } }
+
+    .content-grid { margin-top: 8px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; padding-bottom: 38px; }
+    .cards-panel, .side-panel { background: linear-gradient(180deg, rgba(9,16,33,0.80), rgba(7,13,26,0.62)); border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius-xl); box-shadow: var(--shadow); overflow: hidden; padding: 22px; position: relative; }
+    .cards-panel::before, .side-panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 18%, rgba(34,197,94,0.06), rgba(56,189,248,0.06), transparent 82%); transform: translateX(-60%); animation: flow 10s linear infinite; pointer-events: none; }
+    .cards-panel h3, .side-panel h3 { position: relative; z-index: 1; font-family: 'Orbitron', sans-serif; color: #86efac; letter-spacing: 4px; font-size: 1.05rem; margin-bottom: 16px; }
+    .chip-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .chip { padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.03); color: var(--muted); font-size: .92rem; }
+    
+    .selection-card { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); margin-bottom: 14px; cursor: pointer; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease; overflow: hidden; }
+    .selection-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent, rgba(34,197,94,0.08), transparent); transform: translateX(-100%); transition: transform .45s ease; }
+    .selection-card:hover::before { transform: translateX(100%); }
+    .selection-card:hover { transform: translateY(-3px); background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.28); box-shadow: 0 18px 30px rgba(0,0,0,0.22); }
+    .selection-card img, .locked-icon { width: 68px; height: 68px; flex: 0 0 auto; border-radius: 18px; object-fit: cover; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 10px 22px rgba(0,0,0,0.18); }
+    .locked-icon { display: grid; place-items: center; background: rgba(255,255,255,0.04); font-size: 30px; }
+    .selection-card .text { position: relative; z-index: 1; }
+    .selection-card h4 { font-size: 1.34rem; margin-bottom: 4px; }
+    .selection-card p { color: var(--muted); line-height: 1.45; }
+    .locked { opacity: .55; cursor: not-allowed; filter: grayscale(.15); }
+    .locked:hover { transform: none; box-shadow: none; background: rgba(255,255,255,0.04); }
+
+    .quiz-box { position: relative; z-index: 1; display: grid; gap: 12px; }
+    .quiz-item { padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); cursor: pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .quiz-item:hover { transform: translateY(-2px); border-color: rgba(34,197,94,0.25); box-shadow: 0 16px 26px rgba(0,0,0,0.14); }
+    .quiz-item strong { display: block; font-size: 1.1rem; margin-bottom: 6px; }
+    .quiz-item span { color: var(--muted); line-height: 1.55; }
+    .footer-note { text-align: center; color: rgba(226,232,240,0.52); padding: 10px 0 18px; font-size: .95rem; }
+
+    .modal { position: fixed; inset: 0; background: rgba(2,6,23,0.72); display: none; align-items: center; justify-content: center; z-index: 1200; padding: 18px; backdrop-filter: blur(10px); }
+    .modal.show { display: flex; }
+    .modal-card { width: min(94vw, 1180px); border-radius: 28px; border: 1px solid rgba(255,255,255,0.10); background: linear-gradient(180deg, rgba(9,16,33,0.98), rgba(7,13,26,0.96)); box-shadow: var(--shadow); padding: 24px; max-height: 92vh; overflow: auto; animation: popIn .22s ease forwards; }
+    .modal-header { text-align: center; margin-bottom: 22px; }
+    .modal-header h3 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.5rem, 3vw, 2.4rem); letter-spacing: 5px; color: #86efac; margin-bottom: 8px; }
+    .modal-header p { color: var(--muted); line-height: 1.5;}
+
+    .modal-top { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+    .modal-image-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(120px, 1fr)); align-items: start; }
+    .modal-image, .mini-image { width: 100%; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 24px 50px rgba(0,0,0,0.35); background: rgba(255,255,255,0.03); }
+    .mini-image { max-width: 220px; margin: 0 auto; border-radius: 18px; box-shadow: 0 16px 34px rgba(0,0,0,0.28); }
+    .modal-image img, .mini-image img { width: 100%; display: block; object-fit: cover; }
+    .mini-image img { height: 150px; }
+    .modal-side h3 { font-family: 'Orbitron', sans-serif; color: #86efac; letter-spacing: 4px; margin-bottom: 14px; font-size: 1.15rem; }
+    .members { display: grid; gap: 10px; margin-bottom: 20px; }
+    .member { padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); font-weight: 600; }
+    .race-section { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .race-section h4 { font-family: 'Orbitron', sans-serif; color: #8ddcff; letter-spacing: 3px; margin-bottom: 14px; font-size: 1rem; }
+    .race-list { display: grid; gap: 10px; }
+    .race { padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); font-weight: 600; cursor: pointer; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .race:hover { transform: translateY(-2px); border-color: rgba(34,197,94,0.26); box-shadow: 0 14px 24px rgba(0,0,0,0.18); }
+
+    .category-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .category { min-width: 0; border-radius: 22px; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .category h4 { font-size: 1rem; line-height: 1.35; text-align: center; min-height: 52px; margin-bottom: 12px; color: #fff; }
+    .boxes { display: grid; gap: 10px; }
+    .box { border-radius: 16px; padding: 12px 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); text-align: center; transition: all 0.2s ease;}
+    .box .score { font-family: 'Orbitron', sans-serif; color: var(--green); font-size: 1.08rem; margin-bottom: 6px; letter-spacing: 2px; }
+    .box .label { color: var(--muted); font-size: .92rem; }
+
+    .clickable-box { cursor: pointer; transition: all 0.2s ease; }
+    .clickable-box:hover { transform: translateY(-3px); background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+    .modal-footer { margin-top: 18px; display: flex; justify-content: center; gap: 12px;}
+    .close-btn { border: 0; border-radius: 14px; padding: 12px 16px; background: linear-gradient(135deg, var(--green), #86efac); color: #06111f; font-weight: 800; cursor: pointer; min-width: 180px; }
+
+    .question-box { background: rgba(255,255,255,0.04); padding: 25px; border-left: 5px solid #38bdf8; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    .question-text { font-size: 1.15rem; line-height: 1.6; color: #fff; }
+    .timer { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: bold; color: #ef4444; background: rgba(239, 68, 68, 0.10); padding: 10px 30px; border-radius: 12px; display: inline-block; margin: 15px 0; letter-spacing: 3px; border: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15); }
+    .answer-box { background: rgba(34,197,94,0.08); padding: 25px; border-left: 5px solid #22c55e; border-radius: 12px; display: none; animation: fadeIn 0.5s ease; margin-top: 15px; border-right: 1px solid rgba(34,197,94,0.2); border-bottom: 1px solid rgba(34,197,94,0.2); border-top: 1px solid rgba(34,197,94,0.2); }
+    .answer-title { color: #86efac; font-family: 'Orbitron', sans-serif; margin-bottom: 12px; letter-spacing: 1px; font-size: 1.2rem; }
+    .answer-box p { color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.05rem; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 1180px) { .category-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 980px) { .hero, .content-grid, .modal-top { grid-template-columns: 1fr; } .navbar { flex-direction: column; } }
     @media (max-width: 640px) {
-      .login-shell {
-        padding: 24px 18px;
-        border-radius: 28px;
-      }
-
-      .hero-card,
-      .cards-panel,
-      .side-panel {
-        border-radius: 26px;
-      }
-
-      .hero-card {
-        padding: 24px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .slide {
-        width: 270px;
-        height: 182px;
-      }
-
-      @keyframes drift {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-288px * 5)); }
-      }
-
-      .logos img {
-        height: 60px;
-      }
-
-      .selection-card {
-        align-items: flex-start;
-      }
-
-      .selection-card img,
-      .locked-icon {
-        width: 58px;
-        height: 58px;
-        border-radius: 16px;
-      }
-
-      .category-row {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-image-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .mini-image img {
-        height: 128px;
-      }
+      .login-shell { padding: 24px 18px; border-radius: 28px; }
+      .hero-card, .cards-panel, .side-panel { border-radius: 26px; }
+      .hero-card { padding: 24px; }
+      .stats { grid-template-columns: 1fr; }
+      .slide { width: 270px; height: 182px; }
+      @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-288px * 5)); } }
+      .logos img { height: 60px; }
+      .selection-card { align-items: flex-start; }
+      .selection-card img, .locked-icon { width: 58px; height: 58px; border-radius: 16px; }
+      .category-row { grid-template-columns: 1fr; }
+      .modal-image-grid { grid-template-columns: 1fr; }
+      .mini-image img { height: 128px; }
+      .timer { font-size: 32px; padding: 10px 20px;}
     }
   </style>
 </head>
@@ -1079,11 +217,9 @@
       <div class="login">
         <h1>BİRLİK</h1>
         <div class="sub">İntellektual komanda</div>
-
         <div class="input-box">
           <input id="passInput" type="password" placeholder="Şifrəni daxil edin" autocomplete="off" />
         </div>
-
         <button class="btn" onclick="initPortal()">Portala giriş</button>
         <div id="errorNote">Şifrə yalnışdır. Təkrar yoxlayın.</div>
       </div>
@@ -1102,9 +238,9 @@
         </div>
 
         <div class="logos" aria-label="Logo paneli">
-          <img src="brain.jpg" alt="Brain">
-          <img src="xemse.jpg" alt="Xəmsə">
-          <img src="zekalar.jpg" alt="Zəkalar">
+          <img src="brain.jpg" alt="Brain" onerror="this.style.display='none'">
+          <img src="xemse.jpg" alt="Xəmsə" onerror="this.style.display='none'">
+          <img src="zekalar.jpg" alt="Zəkalar" onerror="this.style.display='none'">
         </div>
       </header>
 
@@ -1116,53 +252,41 @@
             Komanda ruhu, sürət və zəka burada birləşir. Hər sual yeni bir döyüş, hər cavab isə qələbəyə bir addımdır.
             Özünü sınamağa hazırsansa, irəli get.
           </p>
-
           <div class="actions">
-            <button class="solid-btn" onclick="document.querySelector('.content-grid').scrollIntoView({behavior:'smooth'})">
-              Bölmələrə bax
-            </button>
-            <button class="ghost-btn" onclick="openModal('Sistem hazırdır', 'Burada sonra komanda üzvləri, məşq sualları, nəticələr və xüsusi səhifələr yerləşdirilə bilər.')">
-              Məlumat
-            </button>
+            <button class="solid-btn" onclick="document.querySelector('.content-grid').scrollIntoView({behavior:'smooth'})">Bölmələrə bax</button>
+            <button class="ghost-btn" onclick="openModal('Sistem hazırdır', 'Burada sonra komanda üzvləri, məşq sualları, nəticələr və xüsusi səhifələr yerləşdirilə bilər.')">Məlumat</button>
           </div>
         </div>
 
         <div class="side-grid">
           <div class="panel stats">
-            <div class="stat"><strong>03+</strong><span>əsas bölmə</span></div>
+            <div class="stat"><strong>04+</strong><span>əsas bölmə</span></div>
             <div class="stat"><strong>∞</strong><span>məşq fürsətləri</span></div>
             <div class="stat"><strong>24/7</strong><span>aktiv portal</span></div>
             <div class="stat"><strong>HD</strong><span>vizual axın</span></div>
           </div>
-
           <div class="panel message">
             <h3>SAATLI</h3>
-            <p>
-              Bu platforma komanda üzvlərinin birlikdə inkişaf etməsi, daha sürətli düşünməsi və yarışlarda maksimum nəticə göstərməsi üçün yaradılıb.
-            </p>
+            <p>Bu platforma komanda üzvlərinin birlikdə inkişaf etməsi, daha sürətli düşünməsi və yarışlarda maksimum nəticə göstərməsi üçün yaradılıb.</p>
           </div>
         </div>
       </section>
 
       <section class="slider-wrap">
         <div class="track">
-          <div class="slide"><img src="p1.jpg" alt="P1"></div>
-          <div class="slide"><img src="p2.jpg" alt="P2"></div>
-          <div class="slide"><img src="p3.jpg" alt="P3"></div>
-          <div class="slide"><img src="p4.jpg" alt="P4"></div>
-          <div class="slide"><img src="p5.jpg" alt="P5"></div>
-          <div class="slide"><img src="p1.jpg" alt="P1"></div>
-          <div class="slide"><img src="p2.jpg" alt="P2"></div>
-          <div class="slide"><img src="p3.jpg" alt="P3"></div>
-          <div class="slide"><img src="p4.jpg" alt="P4"></div>
-          <div class="slide"><img src="p5.jpg" alt="P5"></div>
+          <div class="slide"><img src="p1.jpg" alt="P1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p2.jpg" alt="P2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p3.jpg" alt="P3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p4.jpg" alt="P4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p5.jpg" alt="P5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p1.jpg" alt="P1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p2.jpg" alt="P2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
         </div>
       </section>
 
       <section class="content-grid">
         <div class="cards-panel">
           <h3 style="text-align:center;">Aktiv Müsabiqələr</h3>
-
           <div class="chip-row" style="justify-content:center;">
             <div class="chip">İntellektual oyunlar</div>
             <div class="chip">Məşq sualları</div>
@@ -1170,7 +294,7 @@
           </div>
 
           <div class="selection-card" onclick="openTeamModal()">
-            <img src="zekalar.jpg" alt="Zəkalar">
+            <img src="zekalar.jpg" alt="Zəkalar" onerror="this.style.display='none'">
             <div class="text">
               <h4>Zəkaların Mübarizəsi</h4>
               <p>Komanda üzvləri və yarışlar üçün əsas bölmə.</p>
@@ -1179,18 +303,12 @@
 
           <div class="selection-card locked">
             <div class="locked-icon">🔒</div>
-            <div class="text">
-              <h4>Xəmsə</h4>
-              <p>Tezliklə açılacaq yeni yarış sahəsi.</p>
-            </div>
+            <div class="text"><h4>Xəmsə</h4><p>Tezliklə açılacaq yeni yarış sahəsi.</p></div>
           </div>
 
           <div class="selection-card locked">
             <div class="locked-icon">🔒</div>
-            <div class="text">
-              <h4>Brain Ring</h4>
-              <p>Tezliklə əlavə ediləcək xüsusi yarış bölməsi.</p>
-            </div>
+            <div class="text"><h4>Brain Ring</h4><p>Tezliklə əlavə ediləcək xüsusi yarış bölməsi.</p></div>
           </div>
         </div>
 
@@ -1204,7 +322,6 @@
           </div>
         </aside>
       </section>
-
       <div class="footer-note">SAATLI</div>
     </div>
   </main>
@@ -1212,7 +329,7 @@
   <div class="modal" id="modal">
     <div class="modal-card">
       <div id="modalInner"></div>
-      <div class="modal-footer">
+      <div class="modal-footer" id="modalFooter">
         <button class="close-btn" onclick="closeModal()">Bağla</button>
       </div>
     </div>
@@ -1220,6 +337,48 @@
 
   <script>
     const CORRECT_PASSWORD = 'brlk1234';
+    let timerInterval = null;
+
+    // YENİ: RİYAZİYYAT SUALLARI (2 Dəqiqə)
+    const riyaziyyatSuallar = {
+      3: { sual: '100 tələbəlik bir qrupda sınaqlar keçirilir. Nəticələrə görə 90 nəfər Riyaziyyatdan, 80 nəfər Fizikadan, 75 nəfər Kimyadan, 70 nəfər isə Biologiyadan imtahandan keçməyi bacarıb.<br><br>Ən pis ehtimalı (minimumu) nəzərə alsaq, bu qrupda ən azı neçə tələbə mütləq şəkildə bütün 4 imtahandan da keçib? (Dəqiq rəqəm yazın)', cavab: '<strong>Cavab:</strong> 15 nəfər.<br><br><strong>İzah (Aha!):</strong> İmtahandan "keçənləri" yox, "kəsilənləri" hesablayın. Riyaziyyatdan 10, Fizikadan 20, Kimyadan 25, Biologiyadan 30 nəfər kəsilib. Ən pis ehtimal olaraq fərz etsək ki, kəsilən adamların hərəsi fərqli bir insandır, maksimum kəsilən sayı 10+20+25+30 = 85 nəfər edər. Yerdə qalan 100 - 85 = 15 nəfər mütləq şəkildə hər 4 imtahandan keçənlərdir!' },
+      4: { sual: 'Aralarındakı məsafə düz 100 km olan iki qatar eyni rels üzrə bir-birinə doğru, hər biri sabit 50 km/saat sürətlə hərəkət edir. Bir milçək isə 75 km/saat sürətlə qatarların birinin burnundan çıxıb digərinə, qatarlar toqquşana qədər dayanmadan o yan-bu yana uçur.<br><br>Milçək iki qatar arasında toqquşma anına qədər ümumilikdə neçə kilometr məsafə uçmuş olar?', cavab: '<strong>Cavab:</strong> 75 km.<br><br><strong>İzah (Aha!):</strong> Məsələyə məsafə yox, zaman prizmasından baxın. Qatarların hər biri 50 km/s sürətlə 100 km-lik (50+50) məsafəni bağlamaq üçün tam olaraq 1 saat hərəkət edəcəklər. Deməli, milçəyin havada uçmaq üçün düz 1 saat vaxtı var. Milçəyin sürəti 75 km/saat olduğu üçün o, 1 saat ərzində hara uçmasından asılı olmayaraq düz 75 km qət edəcək.' },
+      5: { sual: 'Bir şirkətin səhmləri birinci il 50% bahalaşdı. İkinci il isə iqtisadi böhran yarandı və həmin səhmlər qəfildən 50% ucuzlaşdı.<br><br>İki ilin sonunda səhmlərin son qiyməti ilkin (başlanğıc) qiymətlə müqayisədə necə dəyişdi? (Artımı, azalmanı və ya dəyişməz qaldığını faizlə qeyd edin).', cavab: '<strong>Cavab:</strong> 25% azaldı (ucuzlaşdı).<br><br><strong>İzah (Aha!):</strong> Səhmin ilkin qiyməti 100 manat olsun. 50% bahalaşanda 150 manat olur. İkinci il 50% ucuzlaşanda artıq 100 manatın yox, o anki qiymətin (150 manatın) 50%-i silinir. 150-nin yarısı 75 manat edir. Qiymət 75 manata düşür. Başlanğıcda 100 manat idi, sonda 75 manat oldu. Nəticə: Səhmlər 25% dəyər itirdi!' },
+      6: { sual: 'İki riyaziyyatçı qarşılaşır. Biri soruşur: "3 uşağının yaşı neçədir?"<br>Dostu cavab verir: "Yaşlarının hasili 72-dir. Cəmi isə düz qarşımızdakı binanın nömrəsinə bərabərdir."<br>Riyaziyyatçı binanın nömrəsinə baxır və deyir: "Bu məlumat bəs etmədi."<br>Dostu əlavə edir: "Unutdum deyim, ən böyük uşağım pianino çalır."<br>Riyaziyyatçı dərhal yaşları tapır.<br><br>Uşaqların yaşları neçədir?', cavab: '<strong>Cavab:</strong> 3, 3 və 8 yaş.<br><br><strong>İzah (Aha!):</strong> 72-nin 3 vuruğa ayrılış cəmlərinə baxaq: (2,3,12=17), (3,4,6=13), (2,6,6=14), (3,3,8=14). Əgər riyaziyyatçı binanın nömrəsini bildiyi halda cavabı tapmadısa, deməli cəm iki fərqli varianta uyğun gəlir (Yəni cəm 14-dür, amma 2,6,6 yoxsa 3,3,8 olduğunu bilmir). "Ən böyük uşağım" deməyi bildirir ki, cəmi 1 ən böyük var. (2,6,6) variantında iki əkiz ən böyükdür. Yeganə uyğun cavab: 3, 3 və 8-dir.' },
+      7: { sual: 'İki stəkan var: birində 100 ml qara kofe, digərində 100 ml təmiz süd. Bir xörək qaşığı götürüb süddən kofeyə qatırsınız və qarışdırırsınız. Sonra eyni qaşıqla həmin yeni qarışıqdan bir qaşıq dolusu götürüb yenidən süd olan stəkana qaytarırsınız.<br><br>Bu əməliyyatın sonunda kofenin içindəki süd daha çoxdur, yoxsa südün içindəki kofe?', cavab: '<strong>Cavab:</strong> Tamamilə bərabərdir!<br><br><strong>İzah (Aha!):</strong> Tənliyə ehtiyac yoxdur. Prosesin sonunda hər iki stəkanda yenə də tərəzi ilə ölçülmüş kimi düz 100 ml maye var. Deməli, Kofe stəkanından kənara nə qədər kofe çıxıb əskik qalıbsa, onun yerini tamamilə o qədər süd tutub. Və həmin o "əskik kofe" mütləq digər stəkandadır. Yəni yerdəyişmə 1:1 nisbətindədir, miqdarlar bərabərdir.' }
+    };
+
+    // HUMANİTAR ELMLƏR (1 Dəqiqə)
+    const humanitarSuallar = {
+      3: { sual: 'Səfəvi hökmdarı Şah I Təhmasib 1555-ci ildə dövlətin paytaxtını uzun müddət əsas mərkəz olmuş Təbriz şəhərindən Qəzvinə köçürdü. Təbriz həm iqtisadi, həm də mədəni baxımdan Qəzvindən qat-qat inkişaf etmiş və strateji bir şəhər idi.<br><br>Sırf hərbi-coğrafi məntiqə əsaslanaraq, dövlətin bu qərarı verməsindəki əsas məqsəd nə idi?', cavab: '<strong>Cavab:</strong> Təbrizin Osmanlı sərhədinə çox yaxın olması.<br><br><strong>İzah:</strong> Çaldıran döyüşündən sonra Osmanlı ordusu dəfələrlə Təbrizi işğal etmişdi. Şah Təhmasib paytaxtı ölkənin daxilinə (Qəzvinə) çəkməklə, Osmanlı hücumu zamanı əlavə vaxt qazanmaq və qoşun toplamaq üçün strateji məsafə yaratmışdı.' },
+      4: { sual: '1944-cü ildə Müttəfiq qoşunları Normandiyaya (Fransa) çıxarmazdan əvvəl, İngiltərənin başqa bir sahil bölgəsində rezin və taxtadan hazırlanmış minlərlə "saxta tank və təyyarə" yerləşdirdilər. Alman kəşfiyyat təyyarələrinin bu saxta ordunu görməsinə bilərəkdən şərait yaradılırdı.<br><br>Müttəfiqlərin bu nəhəng vizual illüziya ilə almanlara etmək istədiyi əsas hərbi-məntiqi hiylə nə idi?', cavab: '<strong>Cavab:</strong> Alman ordusunun əsas qüvvələrini yanlış istiqamətə cəlb etmək.<br><br><strong>İzah:</strong> İngilislər almanları inandırmaq istəyirdilər ki, əsas hücum başqa yerdən olacaq. Almanlar bu illüziyaya inandılar və ən güclü diviziyalarını başqa yerdə saxladılar. Nəticədə Müttəfiqlər Normandiyada daha zəif müqavimətlə qarşılaşdılar.' },
+      5: { sual: 'Bakı-Tbilisi-Ceyhan (BTC) ixrac boru kəmərinin xəritəsinə baxdıqda xeyli uzadılmış bir marşrutla çəkildiyi görünür. Xəzərdən Aralıq dənizinə ən qısa və iqtisadi cəhətdən ən ucuz yol Ermənistan və ya İran ərazisindən keçmək idi.<br><br>Nəyə görə layihəçilər bilərəkdən daha uzun və bahalı olan Gürcüstan marşrutunu seçməyə məcbur idilər?', cavab: '<strong>Cavab:</strong> Ermənistanla müharibə və İrana qoyulan beynəlxalq sanksiyalar.<br><br><strong>İzah:</strong> Ermənistan Azərbaycan torpaqlarını işğal etdiyi üçün bu ölkə ilə əlaqə kəsilmişdi. İran isə Qərb dünyası tərəfindən sanksiyalara məruz qalmışdı. Yeganə təhlükəsiz və Qərbə açıq tranzit ölkə Gürcüstan idi.' },
+      6: { sual: '1812-ci ildə Napoleon böyük bir ordu ilə Rusiyaya hücum edərək paytaxt Moskvaya qədər irəlilədi. Lakin rus komandanlığı şəhəri sonadək müdafiə etmək əvəzinə, ordunu və əhalini çıxararaq Moskvanı yandırdı. Napoleon cəmi bir neçə ay sonra ordusunun böyük qismi ilə birlikdə məhv olaraq geri çəkilməyə məcbur oldu.<br><br>Rusların döyüşməkdən qaçıb öz paytaxtlarını qəsdən yandırmaqda hərbi-taktiki məqsədi nə idi?', cavab: '<strong>Cavab:</strong> "Yandırılmış torpaq" taktikası (Düşməni resurslardan məhrum etmək).<br><br><strong>İzah:</strong> Şəhəri yandırmaqla onlar Napoleonun ordusunu ərzaqdan və qışlamaq üçün isti binalardan məhrum etdilər. Ac və donmaqda olan fransız ordusu xaraba qalmış şəhərdə tab gətirə bilmədi.' },
+      7: { sual: '1918-ci il mayın 28-də Azərbaycan Xalq Cümhuriyyətinin İstiqlal Bəyannaməsi qəbul edildi. Lakin bu mühüm tarixi hadisə Azərbaycanın indiki hüdudları daxilində deyil, qonşu ölkənin şəhəri olan Tiflisdə (Gürcüstan) baş tutdu.<br><br>O dövrün siyasi və hərbi reallığına əsaslanaraq, Azərbaycan hökumətinin niyə öz müstəqilliyini xarici bir şəhərdə elan etməyə məcbur olduğunu necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> Bakının daşnak-bolşevik qüvvələrinin işğalı altında olması.<br><br><strong>İzah:</strong> 1918-ci ilin mayında Bakı da daxil olmaqla şərq bölgələri Stepan Şaumyanın başçılıq etdiyi Bakı XKS-nin nəzarətində idi. Təhlükəsiz mərkəz olmadığı üçün Zaqafqaziya Seyminin dağıldığı yer olan Tiflisdə müstəqillik elan edildi.' }
+    };
+
+    // MƏDƏNİYYƏT VƏ İNCƏSƏNƏT (1.5 Dəqiqə)
+    const incesenetSuallar = {
+      3: { sual: 'Azərbaycanın qədim xalçaçılıq ənənələrində dahi ustadlar ən mükəmməl simmetrik naxışları toxuyarkən bəzən xalçanın kənarında bilərəkdən kiçik bir "səhv" (məsələn, naxışın əyri olması, bir ilmənin fərqli rəngdə vurulması) edirdilər.<br><br>Mükəmməlliyə can atan sənətkarın öz şah əsərində niyə qəsdən və bilərəkdən qüsur yaratdığını fəlsəfi olaraq necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> "Yalnız Yaradan mükəmməldir" inancına görə.<br><br><strong>İzah:</strong> İslam və Şərq fəlsəfəsinə görə mütləq mükəmməllik ancaq Allaha məxsusdur. İnsan öz yaratdığı əsərin qüsursuz olması iddiyasına düşməmək və təkəbbürdən uzaq olmaq üçün xalçaya bilərəkdən kiçik "noksan" qatırdı.' },
+      4: { sual: 'İtalyan dahi Mikelancelonun məşhur "David" heykəlinə yaxından baxdıqda onun başı və sağ əli bədəninə nisbətdə qeyri-təbii dərəcədə böyük və kobud görünür. İnsan anatomiyasını sümük-sümük bilən Mikelancelo niyə belə bir aşkar "anatomik səhv"ə yol vermişdi?<br><br>Heykəlin ilkin dizayn məqsədinə və fizikanın optika qanunlarına əsaslanaraq bu qeyri-mütənasibliyin səbəbini tapın.', cavab: '<strong>Cavab:</strong> Perspektiv və optik illüziya.<br><br><strong>İzah:</strong> "David" heykəli yerdə deyil, kilsənin çox hündür damının kənarına yerləşdirilmək üçün sifariş edilmişdi. Optika qanunlarına görə uzaqda/yuxarıda olan obyektin yuxarı hissələri kiçik görünür. Mikelancelo bucaq distorsiyasını hesablamış, aşağıdan baxanda normal görünməsi üçün başı və əli qəsdən böyük yonmuşdu.' },
+      5: { sual: '1797-ci ildə inşa edilən Şəki Xan Sarayının pəncərələrindəki "Şəbəkə" sənəti heç bir yapışqan və ya mismar istifadə edilmədən yığılıb. Bu sənət nə qədər estetik görünsə də, ustadların yapışqan və mismardan imtina etməsinin arxasında sırf həyati bir memarlıq səbəbi dayanırdı.<br><br>Şəki bölgəsinin coğrafi xüsusiyyətlərini nəzərə alaraq, pəncərələrin yapışdırılmadan yığılmasının əsas məntiqi nə idi?', cavab: '<strong>Cavab:</strong> Zəlzələyə (seismik aktivliyə) davamlılıq.<br><br><strong>İzah:</strong> Şəki seysmik cəhətdən aktiv bölgədir. Yapışqansız, bir-birinə keçmə üsulu ilə yığılan "Şəbəkə" elastik olur. Zəlzələ zamanı hissələr bir-birinə sürtünərək hərəkət edir, gərginliyi udur və sınmadan salamat qalır.' },
+      6: { sual: 'Dahi rəssam Pablo Pikassonun müharibənin dəhşətlərini əks etdirən "Gernika" tablosu başdan-başa yalnız ağ, qara və boz rənglərdən ibarətdir.<br><br>Pikassonun bu tablonu rəngləndirməkdən imtina edib ona qəsdən "qara-ağ" format verməsindəki əsas vizual və psixoloji səbəb nə idi? O, tamaşaçıya hansı effekti verməyə çalışırdı?', cavab: '<strong>Cavab:</strong> Sənədli qəzet formatı effekti yaratmaq.<br><br><strong>İzah:</strong> Pikasso bu bombalanma xəbərini qara-ağ qəzet fotolarından oxumuşdu. O, müharibənin dəhşətini romantikləşdirmək istəmirdi. Rəngsizlik əsərə "sənədli qəzet fotosu", soyuq reallıq hissi qatırdı; tamaşaçıya sənət əsərinə yox, dəhşətli xəbər bülleteninə baxdığı hissini vermək istəyirdi.' },
+      7: { sual: '1908-ci ildə Üzeyir Hacıbəyov "Leyli və Məcnun" ilə Müsəlman Şərqində ilk operanı səhnəyə qoydu. Lakin bu əsərdə Avropa operaları üçün mütləq sayılan ənənəvi "klassik ariya" ifaları yox idi. Əvəzində aktyorlar səhnədə sırf "Muğam" oxuyurdular.<br><br>Üzeyir bəy mükəmməl Avropa təhsili almasına baxmayaraq, niyə klassik vokal ifalardan imtina edib Muğamdan istifadə etməyə məcbur olmuşdu?', cavab: '<strong>Cavab:</strong> Yerli tamaşaçını öyrəşdirmək və vokal ifaçı yoxluğu.<br><br><strong>İzah:</strong> Birincisi, Şərqdə Avropa üslubunda oxuya bilən opera müğənniləri yox idi. İkincisi, o bilirdi ki, muğama öyrəşmiş yerli tamaşaçı klassik ariyaları dərhal qəbul etməyəcək. O, "keçid" yaradaraq Avropa teatr səhnəsini doğma səslərlə (Muğam) birləşdirdi.' }
+    };
+
+    // TƏBİƏT ELMLƏRİ (2 Dəqiqə)
+    const tebietSuallar = {
+      3: { sual: 'Yorğun olanda kofe içirik və yuxumuz qaçır. Halbuki bioloji və kimyəvi olaraq kofein bədənə qətiyyən heç bir yeni enerji (kalori və ya ATP) vermir.<br><br>Bədənə heç bir enerji verməyən kofein, bizi bioloji olaraq necə "oyaq" saxlayır və yorğunluğumuzu aradan qaldırır? Kofeinin beynimizdə bağlandığı xüsusi kimyəvi maddənin adını və ya prosesi qeyd edin.', cavab: '<strong>Cavab:</strong> Kofein beyindəki "Adenozin" reseptorlarını bloklayır.<br><br><strong>İzah:</strong> İnsan oyaq qaldıqca beyində yorğunluq siqnalı verən "adenozin" adlı maddə toplanır. Kofeinin molekulyar quruluşu adenozinə o qədər bənzəyir ki, o, əsl adenozindən tez davranıb həmin reseptorlara yapışır. Beyin yorğunluq siqnalını oxuya bilmədiyi üçün bədən yorğun olmadığını zənn edir.' },
+      4: { sual: 'Yağış yağarkən asfalt, torpaq və ya geydiyimiz hər hansı bir paltar islananda gözümüzə dərhal daha tünd (qara) rəngdə görünür. Halbuki təmiz su tamamilə şəffafdır və heç bir rəngi yoxdur.<br><br>Rəngsiz suyun toxunduğu səthi qaranlıq göstərməsinin arxasındakı əsas fiziki-optik qanunun/səbəbin adını yazın.', cavab: '<strong>Cavab:</strong> Sınma və Daxili İnikas (İşığın suyun daxilində tələyə düşməsi).<br><br><strong>İzah:</strong> Quru kələ-kötür səth işığı hər tərəfə yaxşı əks etdirir (açıq görünür). Su səthi isladaraq hamarlaşdırdıqda, işıq suyun içindən keçir, lakin geri qayıdarkən dəfələrlə qırılaraq su təbəqəsi daxilində udulur. Gözümüzə daha az işıq çatdığı üçün səth daha tünd görünür.' },
+      5: { sual: 'Çox acı bir bibər yedikdə ağzımız qovrulur və yanır. İnsanların ilk reaksiyası dərhal bir stəkan su içmək olur. Lakin su içmək acını kəsmək əvəzinə onu bütün ağzımıza yayır və vəziyyəti daha da pisləşdirir. Amma süd içmək yanğını saniyələr içində söndürür.<br><br>Acını yaradan maddənin xüsusiyyəti nədir ki, su onu yumaq əvəzinə yayır, süddəki hansı maddə isə onu yuyub apara bilir?', cavab: '<strong>Cavab:</strong> Bibərdəki kapsaisin maddəsi "hidrofob"dur (suda həll olmur), süddəki kazein zülalı isə onu yuyur.<br><br><strong>İzah:</strong> Kapsaisin yağlı bir maddədir, su ilə qarışmır (suyun üstündəki yağ kimi), sadəcə ağızda başqa yerlərə sürüşüb yanğını yayır. Süddəki "kazein" adlı zülal isə sabun rolunu oynayır, kapsaisini ağuşuna alıb reseptorlardan ayırır və mədəyə aparır.' },
+      6: { sual: 'Mikrodalğalı sobaya (mikrovolnovkaya) yemək qoymaq təhlükəsizdir, lakin yeməyin içində səhvən kiçik bir metal çəngəl unutsanız, sobanı işə salan kimi dərhal qığılcımlar çaxmağa və partlayış yaranmağa başlayır.<br><br>Dalğalar yeməyi sakitcə isidə bildiyi halda, metala (xüsusilə iti uclu çəngələ) dəydikdə niyə aqressiv qığılcımlar yaradır? Metalda fərqli olan əsas fiziki amil nədir?', cavab: '<strong>Cavab:</strong> Metaldakı sərbəst elektronların hərəkətə gəlib "Elektrik qövsü" yaratması.<br><br><strong>İzah:</strong> Metalların daxilindəki sərbəst elektronlar mikrodalğanın təsiri ilə şiddətli hərəkətə (cərəyana) gəlirlər. Çəngəlin dişləri kimi iti uclarda bu elektronlar həddindən artıq sıxışır və havaya sıçrayaraq şimşək (elektrik qövsü) effekti yaradırlar.' },
+      7: { sual: 'Gündəlik həyatda isti və ya ilıq duş qəbul edərkən, duş kabinasının (və ya vannanın) polietilen pərdəsi həmişə havalanaraq içəriyə, yəni birbaşa sizin bədəninizə doğru yapışmağa çalışır. Halbuki aşağı axan su havanı çölə itələməlidir.<br><br>İsti su axarkən pərdəni israrla içəriyə doğru çəkən bu təzyiq fərqinin yaranmasına səbəb olan əsas fizika qanununun adını (və ya səbəbini) yazın.', cavab: '<strong>Cavab:</strong> Bernoulli prinsipi (və isti havanın yuxarı qalxması).<br><br><strong>İzah:</strong> İsti su havanı isidir və isti hava yuxarı qalxaraq aşağıda alçaq təzyiq zonası yaradır. Eyni zamanda su damcıları aşağı düşərkən havanı da özü ilə aparıb sürətləndirir (Bernoulli prinsipinə görə sürəti artan havanın təzyiqi düşür). Çöldəki yüksək təzyiqli soyuq hava isə boşluğu doldurmaq üçün pərdəni içəri doğru itələyir.' }
+    };
+
+    // RƏQƏMSAL BACARIQLAR KÖHNƏ SUALLARI DA RƏQƏMSAL QİSMİNDƏ (Sizi çaşdırmasın, "reqemsalSuallar2" adlı obyektdə saxladım köhnələri. Amma SİZ riyaziyyat istədiniz).
+    const reqemsalSuallar2 = {
+      3: { sual: 'Lövhədə 1-dən 10-a qədər olan rəqəmlər yan-yana yazılıb... ', cavab: 'Ehtimal 0-dır.' }, // vs. (Gərək yoxdursa silə bilərsiniz, yuxarıda Rəqəmsal düymələrinə bu sualları bağlamışam)
+    };
 
     function initPortal() {
       const input = document.getElementById('passInput');
@@ -1229,50 +388,32 @@
 
       if (input.value.trim() === CORRECT_PASSWORD) {
         login.classList.add('hide-login');
-        setTimeout(() => {
-          login.style.display = 'none';
-          main.classList.add('show-main');
-        }, 600);
+        setTimeout(() => { login.style.display = 'none'; main.classList.add('show-main'); }, 600);
       } else {
         error.style.display = 'block';
         input.style.borderColor = 'rgba(251,113,133,0.8)';
-
-        input.animate(
-          [
-            { transform: 'translateX(0)' },
-            { transform: 'translateX(-6px)' },
-            { transform: 'translateX(6px)' },
-            { transform: 'translateX(-4px)' },
-            { transform: 'translateX(4px)' },
-            { transform: 'translateX(0)' }
-          ],
-          { duration: 380, easing: 'ease-out' }
-        );
+        input.animate( [ { transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(4px)' }, { transform: 'translateX(0)' } ], { duration: 380, easing: 'ease-out' } );
       }
     }
 
     function openModal(title, text) {
-      document.getElementById('modalInner').innerHTML = `
-        <div class="modal-header">
-          <h3>${title}</h3>
-          <p>${text}</p>
-        </div>
-      `;
+      clearInterval(timerInterval); 
+      document.getElementById('modalInner').innerHTML = `<div class="modal-header"><h3>${title}</h3><p>${text}</p></div>`;
+      document.getElementById('modalFooter').innerHTML = `<button class="close-btn" onclick="closeModal()">Bağla</button>`;
       document.getElementById('modal').classList.add('show');
     }
 
     function openTeamModal() {
+      clearInterval(timerInterval);
       document.getElementById('modalInner').innerHTML = `
         <div class="modal-header">
           <h3>ZƏKALARIN MÜBARİZƏSİ</h3>
           <p>Komanda üzvləri və yarışlar</p>
         </div>
-
         <div class="modal-top">
           <div class="modal-image">
-            <img src="uzvler.jpg" alt="Komanda üzvləri">
+            <img src="uzvler.jpg" alt="Komanda üzvləri" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'">
           </div>
-
           <div class="modal-side">
             <h3>KOMANDA ÜZVLƏRİ</h3>
             <div class="members">
@@ -1283,7 +424,6 @@
               <div class="member">Ləman Cəfərova</div>
               <div class="member">Kənan Səfərov</div>
             </div>
-
             <div class="race-section">
               <h4>YARIŞLAR</h4>
               <div class="race-list">
@@ -1297,58 +437,49 @@
           </div>
         </div>
       `;
+      document.getElementById('modalFooter').innerHTML = `<button class="close-btn" onclick="closeModal()">Bağla</button>`;
       document.getElementById('modal').classList.add('show');
     }
 
     function openRace1Panel() {
+      clearInterval(timerInterval);
       document.getElementById('modalInner').innerHTML = `
         <div class="modal-header">
           <h3>ZƏKALARIN MÜBARİZƏSİ</h3>
           <p>Yarış 1 • Kateqoriya paneli</p>
         </div>
 
-        <div class="modal-top" style="margin-bottom:18px;">
-          <div class="modal-image-grid">
-            <div class="mini-image"><img src="heyder.jpg" alt="Heydər"></div>
-            <div class="mini-image"><img src="elmtehsil.jpg" alt="Elm və Təhsil"></div>
-          </div>
-
-          <div class="modal-side">
-            <h3>KATEQORİYALAR</h3>
-          </div>
-        </div>
-
         <div class="category-row">
           <div class="category">
             <h4>Riyaziyyat</h4>
             <div class="boxes">
-              <div class="box"><div class="score">3 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">4 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">5 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">6 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">7 bal</div><div class="label">Sual</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('riyaziyyat', 3)"><div class="score">3 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('riyaziyyat', 4)"><div class="score">4 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('riyaziyyat', 5)"><div class="score">5 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('riyaziyyat', 6)"><div class="score">6 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('riyaziyyat', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
 
           <div class="category">
             <h4>Humanitar elmlər</h4>
             <div class="boxes">
-              <div class="box"><div class="score">3 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">4 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">5 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">6 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">7 bal</div><div class="label">Sual</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('humanitar', 3)"><div class="score">3 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('humanitar', 4)"><div class="score">4 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('humanitar', 5)"><div class="score">5 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('humanitar', 6)"><div class="score">6 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('humanitar', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
 
           <div class="category">
             <h4>Təbiət elmləri</h4>
             <div class="boxes">
-              <div class="box"><div class="score">3 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">4 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">5 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">6 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">7 bal</div><div class="label">Sual</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('tebiet', 3)"><div class="score">3 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('tebiet', 4)"><div class="score">4 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('tebiet', 5)"><div class="score">5 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('tebiet', 6)"><div class="score">6 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('tebiet', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
 
@@ -1366,34 +497,110 @@
           <div class="category">
             <h4>Mədəniyyət və İncəsənət</h4>
             <div class="boxes">
-              <div class="box"><div class="score">3 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">4 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">5 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">6 bal</div><div class="label">Sual</div></div>
-              <div class="box"><div class="score">7 bal</div><div class="label">Sual</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('incesenet', 3)"><div class="score">3 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('incesenet', 4)"><div class="score">4 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('incesenet', 5)"><div class="score">5 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('incesenet', 6)"><div class="score">6 bal</div><div class="label">Sualı aç</div></div>
+              <div class="box clickable-box" onclick="openQuestionModal('incesenet', 7)"><div class="score">7 bal</div><div class="label">Sualı aç</div></div>
             </div>
           </div>
         </div>
       `;
+      document.getElementById('modalFooter').innerHTML = `
+        <button class="ghost-btn" style="border:1px solid #fff" onclick="openTeamModal()">Geri Qayıt</button>
+        <button class="close-btn" onclick="closeModal()">Bağla</button>
+      `;
       document.getElementById('modal').classList.add('show');
     }
 
+    function openQuestionModal(category, points) {
+      clearInterval(timerInterval); 
+      
+      let qData;
+      let titleName;
+      let timeLimit; 
+      
+      if (category === 'riyaziyyat') {
+          qData = riyaziyyatSuallar[points];
+          titleName = "RİYAZİYYAT VƏ MƏNTİQ";
+          timeLimit = 120; // 2 Dəqiqə
+      } else if (category === 'humanitar') {
+          qData = humanitarSuallar[points];
+          titleName = "HUMANİTAR ELMLƏR (TARİX)";
+          timeLimit = 60;  // 1 Dəqiqə
+      } else if (category === 'incesenet') {
+          qData = incesenetSuallar[points];
+          titleName = "MƏDƏNİYYƏT VƏ İNCƏSƏNƏT";
+          timeLimit = 90;  // 1.5 Dəqiqə
+      } else if (category === 'tebiet') {
+          qData = tebietSuallar[points];
+          titleName = "TƏBİƏT ELMLƏRİ";
+          timeLimit = 120; // 2 Dəqiqə
+      }
+      
+      document.getElementById('modalInner').innerHTML = `
+        <div class="modal-header">
+          <h3>${titleName} - ${points} BAL</h3>
+          <div class="timer" id="questionTimer">--:--</div>
+        </div>
+
+        <div class="question-box">
+          <p class="question-text">${qData.sual}</p>
+        </div>
+
+        <div class="answer-box" id="answerBox">
+          <h4 class="answer-title">Cavab və Məntiqi İzah:</h4>
+          <p>${qData.cavab}</p>
+        </div>
+
+        <div style="text-align:center; margin-top:20px;">
+          <button class="solid-btn" id="showAnswerBtn" onclick="showAnswer()">Cavabı İndi Göstər</button>
+        </div>
+      `;
+      
+      document.getElementById('modalFooter').innerHTML = `
+        <button class="ghost-btn" style="border:1px solid #fff" onclick="openRace1Panel()">Kateqoriyalara Qayıt</button>
+        <button class="close-btn" onclick="closeModal()">Bağla</button>
+      `;
+      
+      let timeLeft = timeLimit; 
+      let mInit = Math.floor(timeLeft / 60);
+      let sInit = timeLeft % 60;
+      document.getElementById('questionTimer').innerText = 
+          (mInit < 10 ? '0' + mInit : mInit) + ':' + (sInit < 10 ? '0' + sInit : sInit);
+          
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById('questionTimer').innerText = 
+          (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+        
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('questionTimer').style.color = '#fff';
+          document.getElementById('questionTimer').style.background = '#ef4444';
+          document.getElementById('questionTimer').innerText = "VAXT BİTDİ!";
+          showAnswer(); 
+        }
+      }, 1000);
+    }
+
+    function showAnswer() {
+      clearInterval(timerInterval); 
+      document.getElementById('answerBox').style.display = 'block';
+      let btn = document.getElementById('showAnswerBtn');
+      if(btn) btn.style.display = 'none'; 
+    }
+
     function closeModal() {
+      clearInterval(timerInterval); 
       document.getElementById('modal').classList.remove('show');
     }
 
-    document.getElementById('passInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') initPortal();
-    });
-
-    document.getElementById('passInput').addEventListener('input', function() {
-      document.getElementById('errorNote').style.display = 'none';
-      this.style.borderColor = 'rgba(255,255,255,0.10)';
-    });
-
-    document.getElementById('modal').addEventListener('click', function(e) {
-      if (e.target.id === 'modal') closeModal();
-    });
+    document.getElementById('passInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') initPortal(); });
+    document.getElementById('passInput').addEventListener('input', function() { document.getElementById('errorNote').style.display = 'none'; this.style.borderColor = 'rgba(255,255,255,0.10)'; });
+    document.getElementById('modal').addEventListener('click', function(e) { if (e.target.id === 'modal') closeModal(); });
   </script>
 </body>
 </html>
