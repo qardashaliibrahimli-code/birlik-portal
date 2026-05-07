@@ -6,164 +6,268 @@
   <title>BİRLİK | İntellektual Portal</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&display=swap');
 
     :root {
-      --bg0: #02040a; --bg1: #07111f; --bg2: #0b1d2f;
-      --card: rgba(7, 14, 26, 0.62); --card-strong: rgba(8, 15, 30, 0.88);
-      --line: rgba(255,255,255,0.09); --text: rgba(255,255,255,0.96);
-      --muted: rgba(226,232,240,0.70);
-      --green: #22c55e; --cyan: #38bdf8; --violet: #8b5cf6; --gold: #fbbf24;
-      --shadow: 0 30px 80px rgba(0,0,0,0.48);
-      --radius-xl: 34px; --radius-lg: 26px; --max: 1240px;
+      --bg0: #02040a; --bg1: #060e18; --bg2: #0a1726;
+      --card: rgba(10, 18, 33, 0.45); 
+      --card-strong: rgba(10, 18, 33, 0.85);
+      --border-light: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --green: #10b981; --green-glow: rgba(16, 185, 129, 0.4);
+      --cyan: #0ea5e9;  --cyan-glow: rgba(14, 165, 233, 0.4);
+      --violet: #8b5cf6;
+      --gold: #f59e0b;
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.6);
+      --radius-xl: 32px; --radius-lg: 24px; --max: 1280px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg0); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+
     body {
       min-height: 100vh; color: var(--text); font-family: 'Inter', sans-serif;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(34,197,94,0.16), transparent 24%),
-        radial-gradient(circle at 80% 15%, rgba(56,189,248,0.12), transparent 24%),
-        radial-gradient(circle at 55% 100%, rgba(139,92,246,0.12), transparent 22%),
-        linear-gradient(160deg, var(--bg0), var(--bg1) 45%, var(--bg2));
+      background-color: var(--bg0);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.1), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.1), transparent 25%),
+        radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.1), transparent 30%);
       overflow-x: hidden;
     }
+
     body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none;
-      background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-      background-size: 58px 58px; opacity: 0.32; mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+      content: ""; position: fixed; inset: -100%; pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: -1;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+      animation: panGrid 60s linear infinite;
+    }
+    @keyframes panGrid { 0% { transform: translateY(0); } 100% { transform: translateY(60px); } }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(60px); opacity: 0.6; pointer-events: none; mix-blend-mode: screen; z-index: 0; transition: transform 0.2s ease-out; }
+    .orb.o1 { width: 350px; height: 350px; left: -100px; top: 5%; background: var(--green); }
+    .orb.o2 { width: 300px; height: 300px; right: -50px; top: 20%; background: var(--cyan); }
+    .orb.o3 { width: 400px; height: 400px; right: 15%; bottom: -150px; background: var(--violet); }
+
+    .wrap { position: relative; z-index: 1; width: min(var(--max), 92vw); margin: 0 auto; padding-bottom: 40px;}
+
+    .glass {
+      background: var(--card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
     }
 
-    .orb { position: fixed; border-radius: 50%; filter: blur(8px); opacity: 0.55; pointer-events: none; mix-blend-mode: screen; z-index: 0; animation: floaty 14s ease-in-out infinite; }
-    .orb.o1 { width: 240px; height: 240px; left: -90px; top: 12%; background: radial-gradient(circle, rgba(34,197,94,0.50), rgba(34,197,94,0.05) 68%, transparent 100%); }
-    .orb.o2 { width: 180px; height: 180px; right: 4%; top: 18%; background: radial-gradient(circle, rgba(56,189,248,0.44), rgba(56,189,248,0.04) 68%, transparent 100%); animation-delay: -4s; }
-    .orb.o3 { width: 300px; height: 300px; right: 12%; bottom: -120px; background: radial-gradient(circle, rgba(139,92,246,0.36), rgba(139,92,246,0.04) 70%, transparent 100%); animation-delay: -8s; }
-    @keyframes floaty { 0%,100% { transform: translateY(0) translateX(0) scale(1); } 50% { transform: translateY(-18px) translateX(12px) scale(1.04); } }
-
-    .wrap { position: relative; z-index: 1; width: min(var(--max), 92vw); margin: 0 auto; }
-
-    /* LOGIN */
-    #login-screen { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at center, rgba(15,23,42,0.78), rgba(2,6,23,0.98)); backdrop-filter: blur(10px); z-index: 1000; transition: opacity .8s ease, transform .8s ease; }
-    .login-shell { width: min(92vw, 470px); padding: 36px; border-radius: 34px; background: linear-gradient(180deg, rgba(13,21,44,0.78), rgba(8,15,30,0.88)); border: 1px solid rgba(255,255,255,0.10); box-shadow: var(--shadow); overflow: hidden; position: relative; animation: popIn .8s cubic-bezier(.2,.85,.2,1) both; }
-    .login-shell::before { content: ""; position: absolute; inset: -2px; background: linear-gradient(120deg, transparent 20%, rgba(34,197,94,0.12), rgba(56,189,248,0.12), transparent 80%); transform: translateX(-60%); animation: sheen 7s linear infinite; pointer-events: none; }
-    @keyframes sheen { from { transform: translateX(-60%); } to { transform: translateX(60%); } }
-    @keyframes popIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .brand-pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-size: 0.88rem; position: relative; z-index: 1; margin-bottom: 16px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #fff, var(--green)); box-shadow: 0 0 16px rgba(34,197,94,0.75); }
-    .login { position: relative; z-index: 1; text-align: center; }
-    .login h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.7rem, 7vw, 4rem); letter-spacing: 12px; line-height: 1; margin-bottom: 12px; background: linear-gradient(180deg, #fff 0%, #d4ffe0 45%, #22c55e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 24px rgba(34,197,94,0.14); }
-    .login .sub { color: var(--muted); font-size: 1rem; letter-spacing: 1px; margin-bottom: 26px; text-transform: uppercase; }
-    .input-box { margin-bottom: 14px; }
-    .input-box input { width: 100%; padding: 16px 18px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.04); color: #fff; font-size: 1.08rem; text-align: center; outline: none; transition: .3s ease; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
-    .input-box input::placeholder { color: rgba(226,232,240,0.45); }
-    .input-box input:focus { border-color: rgba(34,197,94,0.5); box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 0 24px rgba(34,197,94,0.10); transform: translateY(-1px); }
-    .btn { width: 100%; padding: 14px 16px; border: 0; border-radius: 18px; background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%); color: #06111f; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; box-shadow: 0 14px 34px rgba(34,197,94,0.22); transition: transform .25s ease, box-shadow .25s ease; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 4px rgba(34,197,94,0.10), 0 18px 44px rgba(34,197,94,0.30); }
-    #errorNote { display: none; margin-top: 14px; color: #fca5a5; font-weight: 600; }
-    .hide-login { opacity: 0 !important; transform: translateY(-20px) scale(.98) !important; pointer-events: none !important; }
-
-    /* MAIN */
-    #main-content { display: none; opacity: 0; transform: translateY(12px); transition: opacity .85s ease, transform .85s ease; }
-    .show-main { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
-    .navbar { margin-top: 18px; padding: 16px 18px; border-radius: 26px; background: rgba(4, 10, 22, 0.62); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px); box-shadow: 0 16px 36px rgba(0,0,0,0.22); display: flex; align-items: center; justify-content: center; gap: 16px; }
-    .title { display: flex; align-items: center; gap: 14px; }
-    .title-badge { width: 54px; height: 54px; border-radius: 17px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(34,197,94,0.24), rgba(56,189,248,0.16)); border: 1px solid rgba(255,255,255,0.08); font-family: 'Orbitron', sans-serif; letter-spacing: 2px; box-shadow: 0 0 22px rgba(34,197,94,0.10); }
-    .title-text h2 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 4px; }
-    .title-text p { color: var(--muted); font-size: .95rem; }
-    .logos { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .logos img { height: 74px; border-radius: 18px; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); object-fit: contain; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; filter: drop-shadow(0 0 10px rgba(56,189,248,0.12)); }
-    .logos img:hover { transform: translateY(-4px) scale(1.05); border-color: rgba(34,197,94,0.25); box-shadow: 0 0 28px rgba(34,197,94,0.08); }
-
-    .hero { margin-top: 22px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; }
-    .panel { background: linear-gradient(180deg, rgba(9, 16, 33, 0.80), rgba(7, 13, 26, 0.60)); border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius-xl); box-shadow: var(--shadow); position: relative; overflow: hidden; }
-    .panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(34,197,94,0.08), rgba(56,189,248,0.08), transparent 80%); transform: translateX(-60%); animation: flow 9s linear infinite; pointer-events: none; }
-    @keyframes flow { to { transform: translateX(60%); } }
-
-    .hero-card { padding: 36px; min-height: 320px; display: flex; flex-direction: column; justify-content: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-size: .84rem; width: fit-content; margin-bottom: 18px; }
-    .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(34,197,94,.38); animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.38); } 70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
-    .hero-card h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 6vw, 4.4rem); line-height: .98; letter-spacing: 5px; margin-bottom: 16px; }
-    .hero-card h1 .green { color: var(--green); text-shadow: 0 0 12px rgba(34,197,94,.50), 0 0 28px rgba(34,197,94,.25); }
-    .hero-card .desc { color: var(--muted); font-size: 1.08rem; line-height: 1.7; max-width: 62ch; }
-    .actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
-    .solid-btn, .ghost-btn { border: 0; border-radius: 16px; padding: 13px 18px; font-weight: 800; cursor: pointer; letter-spacing: 1px; transition: transform .25s ease, box-shadow .25s ease; }
-    .solid-btn { color: #04111f; background: linear-gradient(135deg, var(--green), #86efac 55%, #dcfce7 100%); box-shadow: 0 14px 30px rgba(34,197,94,0.22); }
-    .ghost-btn { color: #fff; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); }
-    .solid-btn:hover, .ghost-btn:hover { transform: translateY(-2px); }
-
-    .side-grid { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
-    .stats { padding: 18px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .stat { min-height: 118px; border-radius: 22px; padding: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center; }
-    .stat strong { font-family: 'Orbitron', sans-serif; font-size: 1.65rem; margin-bottom: 6px; }
-    .stat span { color: var(--muted); font-size: .98rem; }
-    .stat:nth-child(1) strong { color: #86efac; }
-    .stat:nth-child(2) strong { color: #8ddcff; }
-    .stat:nth-child(3) strong { color: #c4b5fd; }
-    .stat:nth-child(4) strong { color: #fcd34d; }
-    .message { padding: 22px 24px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
-    .message h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; letter-spacing: 4px; color: var(--green); }
-    .message p { color: var(--muted); line-height: 1.7; }
-
-    .slider-wrap { margin-top: 22px; padding: 24px 0 34px; overflow: hidden; perspective: 1200px; mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent); }
-    .track { display: flex; gap: 18px; width: max-content; animation: drift 30s linear infinite; will-change: transform; }
-    .slider-wrap:hover .track { animation-play-state: paused; }
-    .slide { width: 340px; height: 220px; flex: 0 0 auto; overflow: hidden; border-radius: 28px; position: relative; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.03); box-shadow: 0 26px 60px rgba(0,0,0,0.42); transform: perspective(1200px) rotateY(0deg) scale(.96); transition: transform .55s ease, box-shadow .55s ease, border-color .55s ease; }
-    .slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.35)); pointer-events: none; }
-    .slide:hover { transform: perspective(1200px) rotateY(-9deg) translateY(-10px) scale(1.06); border-color: rgba(34,197,94,0.26); box-shadow: 0 34px 82px rgba(0,0,0,0.62), 0 0 30px rgba(34,197,94,0.08); z-index: 3; }
-    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.03); transition: transform .9s ease, filter .9s ease; filter: saturate(1.05) contrast(1.03); }
-    .slide:hover img { transform: scale(1.13); filter: saturate(1.18) contrast(1.08); }
-    @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-358px * 5)); } }
-
-    .content-grid { margin-top: 8px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; padding-bottom: 38px; }
-    .cards-panel, .side-panel { background: linear-gradient(180deg, rgba(9,16,33,0.80), rgba(7,13,26,0.62)); border: 1px solid rgba(255,255,255,0.10); border-radius: var(--radius-xl); box-shadow: var(--shadow); overflow: hidden; padding: 22px; position: relative; }
-    .cards-panel::before, .side-panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 18%, rgba(34,197,94,0.06), rgba(56,189,248,0.06), transparent 82%); transform: translateX(-60%); animation: flow 10s linear infinite; pointer-events: none; }
-    .cards-panel h3, .side-panel h3 { position: relative; z-index: 1; font-family: 'Orbitron', sans-serif; color: #86efac; letter-spacing: 4px; font-size: 1.05rem; margin-bottom: 16px; }
-    .chip-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-    .chip { padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.03); color: var(--muted); font-size: .92rem; }
+    /* LOGIN SCREEN */
+    #login-screen { 
+      position: fixed; inset: 0; display: grid; place-items: center; 
+      background: rgba(2, 4, 10, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      z-index: 1000; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s; 
+    }
+    .login-shell { 
+      width: min(92vw, 440px); padding: 48px 40px; border-radius: var(--radius-xl); 
+      background: linear-gradient(165deg, rgba(20, 30, 50, 0.7), rgba(8, 12, 22, 0.9)); 
+      border: 1px solid rgba(255,255,255,0.12); box-shadow: var(--shadow-lg), inset 0 1px 1px rgba(255,255,255,0.1); 
+      position: relative; overflow: hidden; transform: scale(0.95); opacity: 0;
+      animation: popIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s; 
+    }
+    .login-shell::after {
+      content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: skewX(-20deg); animation: shine 6s infinite; pointer-events: none;
+    }
+    @keyframes shine { 0%, 20% { left: -100%; } 80%, 100% { left: 200%; } }
+    @keyframes popIn { to { opacity: 1; transform: scale(1); } }
     
-    .selection-card { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); margin-bottom: 14px; cursor: pointer; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease; overflow: hidden; }
-    .selection-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent, rgba(34,197,94,0.08), transparent); transform: translateX(-100%); transition: transform .45s ease; }
-    .selection-card:hover::before { transform: translateX(100%); }
-    .selection-card:hover { transform: translateY(-3px); background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.28); box-shadow: 0 18px 30px rgba(0,0,0,0.22); }
-    .selection-card img, .locked-icon { width: 68px; height: 68px; flex: 0 0 auto; border-radius: 18px; object-fit: cover; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 10px 22px rgba(0,0,0,0.18); }
-    .locked-icon { display: grid; place-items: center; background: rgba(255,255,255,0.04); font-size: 30px; }
-    .selection-card .text { position: relative; z-index: 1; }
-    .selection-card h4 { font-size: 1.34rem; margin-bottom: 4px; }
-    .selection-card p { color: var(--muted); line-height: 1.45; }
-    .locked { opacity: .55; cursor: not-allowed; filter: grayscale(.15); }
-    .locked:hover { transform: none; box-shadow: none; background: rgba(255,255,255,0.04); }
+    .brand-pill { 
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; 
+      border-radius: 999px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.03); 
+      color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; font-weight: 600;
+      margin-bottom: 24px; box-shadow: inset 0 1px 2px rgba(255,255,255,0.05);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); animation: pulseDot 2s infinite; }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    
+    .login-content { text-align: center; position: relative; z-index: 2; }
+    .login-content h1 { 
+      font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 3.8rem); font-weight: 900;
+      letter-spacing: 8px; margin-bottom: 8px; 
+      background: linear-gradient(180deg, #ffffff 0%, #a7f3d0 100%); 
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.2)); 
+    }
+    .login-content .sub { color: var(--muted); font-size: 0.95rem; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; font-weight: 500;}
+    
+    .input-wrapper { position: relative; margin-bottom: 20px; }
+    .input-wrapper input { 
+      width: 100%; padding: 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); 
+      background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 1.1rem; text-align: center; font-family: 'Inter'; font-weight: 500;
+      outline: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(10px);
+    }
+    .input-wrapper input::placeholder { color: rgba(255,255,255,0.3); font-weight: 400; }
+    .input-wrapper input:focus { border-color: var(--green); background: rgba(16, 185, 129, 0.05); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1), 0 0 20px rgba(16, 185, 129, 0.2); transform: translateY(-2px); }
+    
+    .btn { 
+      width: 100%; padding: 18px; border: none; border-radius: 16px; 
+      background: linear-gradient(135deg, var(--green) 0%, #059669 100%); 
+      color: #fff; font-weight: 800; font-family: 'Inter'; letter-spacing: 2px; text-transform: uppercase; 
+      cursor: pointer; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); 
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+    .btn:active { transform: translateY(1px); }
+    
+    #errorNote { 
+      opacity: 0; transform: translateY(-10px); color: #ef4444; font-weight: 600; font-size: 0.9rem; margin-top: 16px; transition: all 0.3s ease; 
+    }
+    .show-error { opacity: 1 !important; transform: translateY(0) !important; }
+    .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.05) !important; }
+    @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
+    
+    .hide-login { opacity: 0 !important; transform: scale(1.05) !important; visibility: hidden !important; pointer-events: none; }
 
-    .quiz-box { position: relative; z-index: 1; display: grid; gap: 12px; }
-    .quiz-item { padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); cursor: pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
-    .quiz-item:hover { transform: translateY(-2px); border-color: rgba(34,197,94,0.25); box-shadow: 0 16px 26px rgba(0,0,0,0.14); }
-    .quiz-item strong { display: block; font-size: 1.1rem; margin-bottom: 6px; }
-    .quiz-item span { color: var(--muted); line-height: 1.55; }
-    .footer-note { text-align: center; color: rgba(226,232,240,0.52); padding: 10px 0 18px; font-size: .95rem; }
+    /* MAIN CONTENT */
+    #main-content { display: none; opacity: 0; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .navbar { margin-top: 24px; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .title { display: flex; align-items: center; gap: 16px; }
+    .title-badge { 
+      width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; 
+      background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(14,165,233,0.15)); 
+      border: 1px solid var(--border-light); font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 800; color: #fff;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.2); 
+    }
+    .title-text h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; letter-spacing: 3px; font-weight: 700; margin-bottom: 4px; }
+    .title-text p { color: var(--muted); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .logos { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .logos img { height: 64px; border-radius: 16px; padding: 6px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); object-fit: contain; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+    .logos img:hover { transform: translateY(-5px) scale(1.05); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
 
-    .modal { position: fixed; inset: 0; background: rgba(2,6,23,0.72); display: none; align-items: center; justify-content: center; z-index: 1200; padding: 18px; backdrop-filter: blur(10px); }
-    .modal.show { display: flex; }
-    .modal-card { width: min(94vw, 1180px); border-radius: 28px; border: 1px solid rgba(255,255,255,0.10); background: linear-gradient(180deg, rgba(9,16,33,0.98), rgba(7,13,26,0.96)); box-shadow: var(--shadow); padding: 24px; max-height: 92vh; overflow: auto; animation: popIn .22s ease forwards; }
-    .modal-header { text-align: center; margin-bottom: 22px; }
-    .modal-header h3 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.5rem, 3vw, 2.4rem); letter-spacing: 5px; color: #86efac; margin-bottom: 8px; }
-    .modal-header p { color: var(--muted); line-height: 1.5;}
+    .hero { margin-top: 32px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
+    .hero-card { padding: 48px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px; border-radius: 999px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; width: fit-content; margin-bottom: 24px; }
+    .hero-card h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(3rem, 6vw, 5rem); line-height: 1; letter-spacing: 4px; margin-bottom: 20px; font-weight: 900; }
+    .hero-card h1 .highlight { color: var(--green); text-shadow: 0 0 30px var(--green-glow); }
+    .hero-card .desc { color: var(--muted); font-size: 1.1rem; line-height: 1.8; max-width: 90%; margin-bottom: 32px; font-weight: 400; }
+    
+    .actions { display: flex; flex-wrap: wrap; gap: 16px; position: relative; z-index: 2; }
+    .btn-primary, .btn-secondary { padding: 16px 28px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; border: none; font-family: 'Inter'; text-transform: uppercase; }
+    .btn-primary { background: var(--text); color: var(--bg0); box-shadow: 0 8px 20px rgba(255,255,255,0.15); }
+    .btn-primary:hover { background: #e2e8f0; transform: translateY(-3px); box-shadow: 0 12px 25px rgba(255,255,255,0.25); }
+    .btn-secondary { background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border-light); backdrop-filter: blur(10px); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--border-hover); transform: translateY(-3px); }
 
-    .modal-top { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
-    .modal-image-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(120px, 1fr)); align-items: start; }
-    .modal-image, .mini-image { width: 100%; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 24px 50px rgba(0,0,0,0.35); background: rgba(255,255,255,0.03); }
-    .mini-image { max-width: 220px; margin: 0 auto; border-radius: 18px; box-shadow: 0 16px 34px rgba(0,0,0,0.28); }
-    .modal-image img, .mini-image img { width: 100%; display: block; object-fit: cover; }
-    .mini-image img { height: 150px; }
-    .modal-side h3 { font-family: 'Orbitron', sans-serif; color: #86efac; letter-spacing: 4px; margin-bottom: 14px; font-size: 1.15rem; }
-    .members { display: grid; gap: 10px; margin-bottom: 20px; }
-    .member { padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); font-weight: 600; }
-    .race-section { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .race-section h4 { font-family: 'Orbitron', sans-serif; color: #8ddcff; letter-spacing: 3px; margin-bottom: 14px; font-size: 1rem; }
-    .race-list { display: grid; gap: 10px; }
-    .race { padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); font-weight: 600; cursor: pointer; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
-    .race:hover { transform: translateY(-2px); border-color: rgba(34,197,94,0.26); box-shadow: 0 14px 24px rgba(0,0,0,0.18); }
+    .side-grid { display: grid; grid-template-rows: auto auto; gap: 24px; }
+    .stats { padding: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stat { border-radius: 16px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center; transition: background 0.3s ease; }
+    .stat:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+    .stat strong { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 4px; font-weight: 800; }
+    .stat span { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .stat:nth-child(1) strong { color: var(--green); text-shadow: 0 0 15px var(--green-glow); }
+    .stat:nth-child(2) strong { color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+    .stat:nth-child(3) strong { color: var(--violet); text-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
+    .stat:nth-child(4) strong { color: var(--gold); text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+    
+    .message { padding: 32px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, rgba(16,185,129,0.05), transparent); }
+    .message h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--green); margin-bottom: 12px; }
+    .message p { color: var(--text); line-height: 1.8; opacity: 0.9; font-size: 1rem; }
 
+    .slider-wrap { margin-top: 32px; padding: 20px 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
+    .track { display: flex; gap: 24px; width: max-content; animation: drift 40s linear infinite; padding: 20px 0; }
+    .slider-wrap:hover .track { animation-play-state: paused; }
+    .slide { width: 320px; height: 200px; border-radius: 20px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+    .slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); pointer-events: none; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .slide:hover { transform: translateY(-10px) scale(1.02); border-color: var(--green); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--green-glow); z-index: 10; }
+    .slide:hover img { transform: scale(1.1); }
+    @keyframes drift { to { transform: translateX(calc(-344px * 5)); } }
+
+    .content-grid { margin-top: 16px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media(min-width: 980px) { .content-grid { grid-template-columns: 1.3fr 0.7fr; } }
+    
+    .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;}
+    .panel-header h3 { font-family: 'Orbitron', sans-serif; color: #fff; letter-spacing: 3px; font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+    .panel-header h3::before { content: ""; display: block; width: 12px; height: 12px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); }
+    
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: var(--muted); font-size: 0.85rem; font-weight: 600; cursor: default; transition: all 0.3s; }
+    .chip:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    
+    .cards-panel, .side-panel { padding: 32px; }
+    
+    .selection-card { position: relative; display: flex; align-items: center; gap: 20px; padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); margin-bottom: 16px; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; }
+    .selection-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--green); transform: scaleY(0); transition: transform 0.4s ease; transform-origin: center; }
+    .selection-card:hover { transform: translateX(10px); background: rgba(255,255,255,0.05); border-color: rgba(16,185,129,0.3); box-shadow: var(--shadow-sm); }
+    .selection-card:hover::before { transform: scaleY(1); }
+    .selection-card img, .locked-icon { width: 80px; height: 80px; flex-shrink: 0; border-radius: 16px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+    .locked-icon { display: grid; place-items: center; background: rgba(0,0,0,0.4); font-size: 2rem; color: var(--muted); }
+    .selection-card .text h4 { font-size: 1.4rem; margin-bottom: 6px; font-weight: 700; color: #fff; transition: color 0.3s; }
+    .selection-card:hover .text h4 { color: var(--green); }
+    .selection-card .text p { color: var(--muted); line-height: 1.5; font-size: 0.95rem; }
+    
+    .locked { opacity: 0.6; cursor: not-allowed; filter: grayscale(100%); }
+    .locked:hover { transform: none; background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+    .locked:hover::before { transform: scaleY(0); }
+    .locked:hover .text h4 { color: #fff; }
+
+    .quiz-box { display: grid; gap: 16px; }
+    .quiz-item { padding: 24px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.2)); cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .quiz-item:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 10px 30px rgba(14,165,233,0.15); }
+    .quiz-item strong { display: block; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--cyan); margin-bottom: 8px; letter-spacing: 1px; }
+    .quiz-item span { color: var(--muted); line-height: 1.6; font-size: 0.95rem; display: block;}
+
+    .footer-note { text-align: center; padding: 40px 0 20px; color: rgba(255,255,255,0.2); font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 4px; font-weight: 800; }
+
+    /* MODAL SYSTEM */
+    .modal-overlay { 
+      position: fixed; inset: 0; background: rgba(2, 4, 10, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center; z-index: 1200; padding: 20px;
+      opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-overlay.show { opacity: 1; visibility: visible; }
+    
+    .modal-card { 
+      width: 100%; max-width: 1100px; max-height: 90vh; overflow-y: auto; overflow-x: hidden;
+      background: var(--bg1); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-xl); 
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.05) inset; padding: 40px; 
+      transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .modal-overlay.show .modal-card { transform: scale(1) translateY(0); opacity: 1; }
+
+    .modal-header { text-align: center; margin-bottom: 32px; position: relative; }
+    .modal-header h3 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 4vw, 2.5rem); letter-spacing: 4px; color: #fff; margin-bottom: 12px; font-weight: 900; text-transform: uppercase; }
+    .modal-header p { color: var(--green); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media(min-width: 800px) { .team-grid { grid-template-columns: 1fr 1.2fr; } }
+    
+    .team-image-box { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--shadow-sm); position: relative;}
+    .team-image-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;}
+    .team-image-box:hover img { transform: scale(1.05); }
+    
+    .team-info h3 { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;}
+    .team-info h3::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); border-radius: 50%; }
+    
+    .members-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .member-tag { padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-align: center; transition: all 0.2s; }
+    .member-tag:hover { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.3); color: #fff; transform: translateY(-2px); }
+    
+    .race-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .race-btn { padding: 14px 24px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: 'Inter'; font-size: 0.95rem; letter-spacing: 1px; flex: 1; min-width: 120px; text-align: center; }
+    .race-btn.active, .race-btn:hover { background: var(--green); color: var(--bg0); border-color: var(--green); box-shadow: 0 5px 15px var(--green-glow); transform: translateY(-2px); }
+
+    /* ORİJİNAL KATEQORİYA (YARIŞ 1) KODLARI BURAYA QAYTARILDI */
     .category-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
     .category { min-width: 0; border-radius: 22px; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
     .category h4 { font-size: 1rem; line-height: 1.35; text-align: center; min-height: 52px; margin-bottom: 12px; color: #fff; }
@@ -171,139 +275,156 @@
     .box { border-radius: 16px; padding: 12px 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); text-align: center; transition: all 0.2s ease;}
     .box .score { font-family: 'Orbitron', sans-serif; color: var(--green); font-size: 1.08rem; margin-bottom: 6px; letter-spacing: 2px; }
     .box .label { color: var(--muted); font-size: .92rem; }
-
     .clickable-box { cursor: pointer; transition: all 0.2s ease; }
     .clickable-box:hover { transform: translateY(-3px); background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-    .modal-footer { margin-top: 18px; display: flex; justify-content: center; gap: 12px;}
-    .close-btn { border: 0; border-radius: 14px; padding: 12px 16px; background: linear-gradient(135deg, var(--green), #86efac); color: #06111f; font-weight: 800; cursor: pointer; min-width: 180px; }
-
-    .question-box { background: rgba(255,255,255,0.04); padding: 25px; border-left: 5px solid #38bdf8; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    .question-text { font-size: 1.15rem; line-height: 1.6; color: #fff; }
-    .timer { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: bold; color: #ef4444; background: rgba(239, 68, 68, 0.10); padding: 10px 30px; border-radius: 12px; display: inline-block; margin: 15px 0; letter-spacing: 3px; border: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15); }
-    .answer-box { background: rgba(34,197,94,0.08); padding: 25px; border-left: 5px solid #22c55e; border-radius: 12px; display: none; animation: fadeIn 0.5s ease; margin-top: 15px; border-right: 1px solid rgba(34,197,94,0.2); border-bottom: 1px solid rgba(34,197,94,0.2); border-top: 1px solid rgba(34,197,94,0.2); }
-    .answer-title { color: #86efac; font-family: 'Orbitron', sans-serif; margin-bottom: 12px; letter-spacing: 1px; font-size: 1.2rem; }
-    .answer-box p { color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.05rem; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
     @media (max-width: 1180px) { .category-row { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 980px) { .hero, .content-grid, .modal-top { grid-template-columns: 1fr; } .navbar { flex-direction: column; } }
-    @media (max-width: 640px) {
-      .login-shell { padding: 24px 18px; border-radius: 28px; }
-      .hero-card, .cards-panel, .side-panel { border-radius: 26px; }
-      .hero-card { padding: 24px; }
+    @media (max-width: 640px) { .category-row { grid-template-columns: 1fr; } }
+
+    /* DAHA OXUNAQLI SUAL VƏ CAVAB QUTUSU YENİLƏNMƏSİ */
+    .q-timer { 
+      font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; color: #f43f5e; 
+      background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); 
+      padding: 10px 40px; border-radius: 20px; display: inline-block; margin: 20px 0; 
+      letter-spacing: 4px; box-shadow: 0 10px 25px rgba(244, 63, 94, 0.15), inset 0 0 20px rgba(244, 63, 94, 0.05); text-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+    }
+    .q-timer.time-up { background: #f43f5e; color: #fff; box-shadow: 0 0 40px rgba(244, 63, 94, 0.6); animation: pulseAlert 1s infinite; font-size: 2rem;}
+    @keyframes pulseAlert { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    
+    .q-text-box { 
+      background: rgba(0, 0, 0, 0.5); /* Daha tünd arxaplan */
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 5px solid var(--cyan); 
+      padding: 35px 40px; /* Daha geniş boşluqlar */
+      border-radius: 16px; 
+      font-size: 1.4rem; /* Daha böyük şrift */
+      font-weight: 500; 
+      line-height: 1.85; /* Daha asan oxumaq üçün məsafə */
+      color: #ffffff; /* Tam ağ mətn */
+      text-shadow: 0 2px 5px rgba(0,0,0,0.8); /* Kontrast üçün kölgə */
+      margin-bottom: 24px; 
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+    }
+    
+    .a-text-box { 
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); border-left: 5px solid var(--green); 
+      padding: 30px 40px; border-radius: 16px; display: none; margin-top: 24px;
+      animation: revealAns 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: top;
+    }
+    @keyframes revealAns { from { opacity: 0; transform: translateY(-20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .a-text-box h4 { color: var(--green); font-family: 'Orbitron', sans-serif; font-size: 1.3rem; margin-bottom: 16px; letter-spacing: 2px;}
+    .a-text-box p { color: #f8fafc; font-size: 1.2rem; line-height: 1.8; text-shadow: 0 1px 3px rgba(0,0,0,0.5);}
+
+    .modal-actions { margin-top: 40px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 32px;}
+
+    @media (max-width: 768px) {
+      .login-shell { padding: 32px 24px; }
+      .hero-card { padding: 32px 24px; }
       .stats { grid-template-columns: 1fr; }
-      .slide { width: 270px; height: 182px; }
-      @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-288px * 5)); } }
-      .logos img { height: 60px; }
-      .selection-card { align-items: flex-start; }
-      .selection-card img, .locked-icon { width: 58px; height: 58px; border-radius: 16px; }
-      .category-row { grid-template-columns: 1fr; }
-      .modal-image-grid { grid-template-columns: 1fr; }
-      .mini-image img { height: 128px; }
-      .timer { font-size: 32px; padding: 10px 20px;}
+      .navbar { flex-direction: column; text-align: center; }
+      .logos { justify-content: center; }
+      .modal-card { padding: 24px; }
+      .q-timer { font-size: 2.2rem; padding: 10px 20px; }
+      .q-text-box { font-size: 1.2rem; padding: 25px; }
+      .a-text-box { font-size: 1.1rem; padding: 25px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
+  <div class="orb o1" id="orb1"></div>
+  <div class="orb o2" id="orb2"></div>
+  <div class="orb o3" id="orb3"></div>
 
   <section id="login-screen">
     <div class="login-shell">
-      <div class="brand-pill"><span class="dot"></span> BİRLİK portalı</div>
-      <div class="login">
+      <div class="brand-pill"><span class="dot"></span> Sistem Aktivdir</div>
+      <div class="login-content">
         <h1>BİRLİK</h1>
-        <div class="sub">İntellektual komanda</div>
-        <div class="input-box">
+        <div class="sub">İntellektual Portal</div>
+        <div class="input-wrapper">
           <input id="passInput" type="password" placeholder="Şifrəni daxil edin" autocomplete="off" />
         </div>
-        <button class="btn" onclick="initPortal()">Portala giriş</button>
-        <div id="errorNote">Şifrə yalnışdır. Təkrar yoxlayın.</div>
+        <button class="btn" onclick="initPortal()">Sistemə Giriş</button>
+        <div id="errorNote">Xəta: Şifrə yalnışdır. Təkrar yoxlayın.</div>
       </div>
     </div>
   </section>
 
   <main id="main-content">
-    <div class="wrap">
-      <header class="navbar">
+    <div class="wrap glass" style="margin-top: 20px; border:none; background:transparent; box-shadow:none; backdrop-filter:none;">
+      
+      <header class="navbar glass">
         <div class="title">
           <div class="title-badge">VN</div>
           <div class="title-text">
             <h2>Vüqar Namazov</h2>
-            <p>Təlimçi</p>
+            <p>Təlimçi / Moderator</p>
           </div>
         </div>
-
-        <div class="logos" aria-label="Logo paneli">
-          <img src="brain.jpg" alt="Brain" onerror="this.style.display='none'">
-          <img src="xemse.jpg" alt="Xəmsə" onerror="this.style.display='none'">
-          <img src="zekalar.jpg" alt="Zəkalar" onerror="this.style.display='none'">
+        <div class="logos">
+          <img src="brain.jpg" alt="Brain" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'">
+          <img src="xemse.jpg" alt="Xəmsə" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'">
+          <img src="zekalar.jpg" alt="Zəkalar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'">
         </div>
       </header>
 
       <section class="hero">
-        <div class="panel hero-card">
-          <div class="eyebrow"><span class="pulse"></span> canlı portal • komanda mərkəzi</div>
-          <h1><span class="green">BİRLİK</span></h1>
-          <p class="desc">
-            Komanda ruhu, sürət və zəka burada birləşir. Hər sual yeni bir döyüş, hər cavab isə qələbəyə bir addımdır.
-            Özünü sınamağa hazırsansa, irəli get.
-          </p>
+        <div class="hero-card glass">
+          <div class="eyebrow">Canlı Portal • Komanda Mərkəzi</div>
+          <h1><span class="highlight">BİRLİK</span></h1>
+          <p class="desc">Komanda ruhu, sürət və zəka burada birləşir. Hər sual yeni bir döyüş, hər cavab isə qələbəyə bir addımdır. Özünü sınamağa hazırsansa, irəli get.</p>
           <div class="actions">
-            <button class="solid-btn" onclick="document.querySelector('.content-grid').scrollIntoView({behavior:'smooth'})">Bölmələrə bax</button>
-            <button class="ghost-btn" onclick="openModal('Sistem hazırdır', 'Burada sonra komanda üzvləri, məşq sualları, nəticələr və xüsusi səhifələr yerləşdirilə bilər.')">Məlumat</button>
+            <button class="btn-primary" onclick="document.querySelector('.content-grid').scrollIntoView({behavior:'smooth'})">Bölmələrə Bax</button>
+            <button class="btn-secondary" onclick="openInfoModal()">Məlumat</button>
           </div>
         </div>
 
         <div class="side-grid">
-          <div class="panel stats">
-            <div class="stat"><strong>05+</strong><span>əsas bölmə</span></div>
-            <div class="stat"><strong>∞</strong><span>məşq fürsətləri</span></div>
-            <div class="stat"><strong>24/7</strong><span>aktiv portal</span></div>
-            <div class="stat"><strong>HD</strong><span>vizual axın</span></div>
+          <div class="stats glass">
+            <div class="stat"><strong>05+</strong><span>Bölmə</span></div>
+            <div class="stat"><strong>∞</strong><span>Məşq</span></div>
+            <div class="stat"><strong>24/7</strong><span>Aktiv</span></div>
+            <div class="stat"><strong>PRO</strong><span>Sistem</span></div>
           </div>
-          <div class="panel message">
+          <div class="message glass">
             <h3>SAATLI</h3>
-            <p>Bu platforma komanda üzvlərinin birlikdə inkişaf etməsi, daha sürətli düşünməsi və yarışlarda maksimum nəticə göstərməsi üçün yaradılıb.</p>
+            <p>Bu platforma komanda üzvlərinin birlikdə inkişaf etməsi, daha sürətli düşünməsi və yarışlarda maksimum nəticə göstərməsi üçün xüsusi olaraq kodlaşdırılıb.</p>
           </div>
         </div>
       </section>
 
       <section class="slider-wrap">
         <div class="track">
-          <div class="slide"><img src="p1.jpg" alt="P1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p2.jpg" alt="P2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p3.jpg" alt="P3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p4.jpg" alt="P4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p5.jpg" alt="P5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p1.jpg" alt="P1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'"></div>
-          <div class="slide"><img src="p2.jpg" alt="P2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23374151\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p1.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230f172a\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p2.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231e293b\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p3.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230f172a\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p4.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231e293b\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p5.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230f172a\'/%3E%3C/svg%3E'"></div>
+          <div class="slide"><img src="p1.jpg" alt="Gallery" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230f172a\'/%3E%3C/svg%3E'"></div>
         </div>
       </section>
 
       <section class="content-grid">
-        <div class="cards-panel">
-          <h3 style="text-align:center;">Aktiv Müsabiqələr</h3>
-          <div class="chip-row" style="justify-content:center;">
-            <div class="chip">İntellektual oyunlar</div>
-            <div class="chip">Məşq sualları</div>
-            <div class="chip">Komanda profilləri</div>
+        <div class="cards-panel glass">
+          <div class="panel-header">
+            <h3>Aktiv Müsabiqələr</h3>
+            <div class="chip-row">
+              <div class="chip">Oyunlar</div>
+              <div class="chip">Suallar</div>
+            </div>
           </div>
 
           <div class="selection-card" onclick="openTeamModal()">
-            <img src="zekalar.jpg" alt="Zəkalar" onerror="this.style.display='none'">
+            <img src="zekalar.jpg" alt="Zəkalar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231e293b\'/%3E%3C/svg%3E'">
             <div class="text">
               <h4>Zəkaların Mübarizəsi</h4>
-              <p>Komanda üzvləri və yarışlar üçün əsas bölmə.</p>
+              <p>Komanda üzvləri və yarışlar üçün əsas oyun interfeysi.</p>
             </div>
           </div>
 
           <div class="selection-card locked">
             <div class="locked-icon">🔒</div>
-            <div class="text"><h4>Xəmsə</h4><p>Tezliklə açılacaq yeni yarış sahəsi.</p></div>
+            <div class="text"><h4>Xəmsə</h4><p>Sistem yenilənməsindən sonra aktivləşəcək.</p></div>
           </div>
 
           <div class="selection-card locked">
@@ -312,34 +433,39 @@
           </div>
         </div>
 
-        <aside class="side-panel">
-          <h3>Sual Bankı</h3>
+        <aside class="side-panel glass">
+          <div class="panel-header" style="justify-content: center;">
+            <h3 style="margin:0;">Sual Bankı</h3>
+          </div>
           <div class="quiz-box">
-            <div class="quiz-item" onclick="openModal('Sual Bankı', 'İstədiyiniz müsabiqəyə uyğun bankı seçin. Sonradan burada kateqoriyalar və sual dəstləri olacaq.')">
-              <strong>Sual Bankı</strong>
-              <span>İstədiyiniz müsabiqəyə uyğun bankı seçin.</span>
+            <div class="quiz-item" onclick="openInfoModal()">
+              <strong>Arxiv Bölməsi</strong>
+              <span>İstədiyiniz müsabiqəyə uyğun bankı seçin. Sonradan burada kateqoriyalar olacaq.</span>
             </div>
           </div>
         </aside>
       </section>
-      <div class="footer-note">SAATLI</div>
+      
+      <div class="footer-note">SAATLI © 2026 BİRLİK PORTALI</div>
     </div>
   </main>
 
-  <div class="modal" id="modal">
-    <div class="modal-card">
-      <div id="modalInner"></div>
-      <div class="modal-footer" id="modalFooter">
-        <button class="close-btn" onclick="closeModal()">Bağla</button>
+  <div class="modal-overlay" id="modalContainer">
+    <div class="modal-card" id="modalCard">
       </div>
-    </div>
   </div>
 
   <script>
+    // --- Audio Control ---
+    // Diqqət: 'heyecan.mp3' adlı faylı HTML faylı ilə eyni qovluğa qoymalısan!
+    const tensionMusic = new Audio('heyecan.mp3');
+    tensionMusic.loop = true;
+    tensionMusic.volume = 0.3; // Səsi çox yüksək olmasın deyə 30%-ə tənzimləndi
+
+    // --- Data Base ---
     const CORRECT_PASSWORD = 'brlk1234';
     let timerInterval = null;
 
-    // 1. RƏQƏMSAL BACARIQLAR (2 Dəqiqə)
     const reqemsalSuallar = {
       3: { sual: 'Lövhədə 1-dən 10-a qədər olan rəqəmlər yan-yana yazılıb: 1 2 3 4 5 6 7 8 9 10.<br><br>Siz bu ədədlərin arasına yalnız "+" və ya "-" işarələri qoya bilərsiniz. Hər hansı bir ədədi birləşdirmək olmaz, mütləq aralarında işarə olmalıdır.<br><br>Bu əməliyyatın yekun nəticəsinin tam olaraq 0 (sıfır) olma ehtimalı neçədir?', cavab: '<strong>Cavab:</strong> Ehtimal 0-dır.<br><br><strong>İzah:</strong> 1-dən 10-a qədər ədədlərin cəmi 55-dir. Bu tək ədəddir. Hər hansı "+" işarəsini "-" ilə əvəzlədikdə nəticə həmişə cüt ədəd qədər azalır. Tək ədəddən cüt ədəd çıxdıqda nəticə həmişə tək qalır. Sıfır (0) cüt ədəd olduğu üçün nəticənin 0 olma ehtimalı qətiyyən yoxdur.' },
       4: { sual: 'Bir sinif otağında lövhəyə alt-alta 100 ədəd cümlə yazılıb:<br><br>1-ci cümlə: "Bu lövhədə tam olaraq 1 dənə yalan cümlə var."<br>2-ci cümlə: "Bu lövhədə tam olaraq 2 dənə yalan cümlə var."<br>...<br>100-cü cümlə: "Bu lövhədə tam olaraq 100 dənə yalan cümlə var."<br><br>Bu cümlələrdən hansı (və ya hansıları) mütləq şəkildə doğrudur?', cavab: '<strong>Cavab:</strong> Yalnız 99-cu cümlə doğrudur.<br><br><strong>İzah:</strong> Yalanların sayı konkret bir rəqəm olmalıdır, buna görə də bu fərqli cümlələrdən yalnız 1-i eyni anda doğru ola bilər. Əgər lövhədəki 1 cümlə doğrudursa, deməli yerdə qalan 99 cümlə yalandır. "Lövhədə 99 yalan var" iddiasını isə məhz 99-cu cümlə irəli sürür.' },
@@ -348,7 +474,6 @@
       7: { sual: 'A ədədi tam olaraq 100 ədəd 9 rəqəmindən ibarətdir: <br>A = 999...999<br><br>A² (A-nın kvadratı) ədədinin rəqəmləri cəmini tapın.', cavab: '<strong>Cavab:</strong> 900.<br><br><strong>İzah:</strong> Nümunələr: 9² = 81 (cəm 9), 99² = 9801 (cəm 18), 999² = 998001 (cəm 27). Qanunauyğunluğa əsasən, rəqəmlər cəmi doqquzların sayı vurulsun 9-dur. A ədədində 100 ədəd 9 olduğu üçün rəqəmlərin cəmi 100 × 9 = 900 edəcək.' }
     };
 
-    // 2. RİYAZİYYAT VƏ MƏNTİQ (2 Dəqiqə)
     const riyaziyyatSuallar = {
       3: { sual: '100 tələbəlik bir qrupda sınaqlar keçirilir. Nəticələrə görə 90 nəfər Riyaziyyatdan, 80 nəfər Fizikadan, 75 nəfər Kimyadan, 70 nəfər isə Biologiyadan imtahandan keçməyi bacarıb.<br><br>Ən pis ehtimalı (minimumu) nəzərə alsaq, bu qrupda ən azı neçə tələbə mütləq şəkildə bütün 4 imtahandan da keçib? (Dəqiq rəqəm yazın)', cavab: '<strong>Cavab:</strong> 15 nəfər.<br><br><strong>İzah (Aha!):</strong> İmtahandan "keçənləri" yox, "kəsilənləri" hesablayın. Riyaziyyatdan 10, Fizikadan 20, Kimyadan 25, Biologiyadan 30 nəfər kəsilib. Ən pis ehtimal olaraq fərz etsək ki, kəsilən adamların hərəsi fərqli bir insandır, maksimum kəsilən sayı 10+20+25+30 = 85 nəfər edər. Yerdə qalan 100 - 85 = 15 nəfər mütləq şəkildə hər 4 imtahandan keçənlərdir!' },
       4: { sual: 'Aralarındakı məsafə düz 100 km olan iki qatar eyni rels üzrə bir-birinə doğru, hər biri sabit 50 km/saat sürətlə hərəkət edir. Bir milçək isə 75 km/saat sürətlə qatarların birinin burnundan çıxıb digərinə, qatarlar toqquşana qədər dayanmadan o yan-bu yana uçur.<br><br>Milçək iki qatar arasında toqquşma anına qədər ümumilikdə neçə kilometr məsafə uçmuş olar?', cavab: '<strong>Cavab:</strong> 75 km.<br><br><strong>İzah (Aha!):</strong> Məsələyə məsafə yox, zaman prizmasından baxın. Qatarların hər biri 50 km/s sürətlə 100 km-lik (50+50) məsafəni bağlamaq üçün tam olaraq 1 saat hərəkət edəcəklər. Deməli, milçəyin havada uçmaq üçün düz 1 saat vaxtı var. Milçəyin sürəti 75 km/saat olduğu üçün o, 1 saat ərzində hara uçmasından asılı olmayaraq düz 75 km qət edəcək.' },
@@ -357,7 +482,6 @@
       7: { sual: 'İki stəkan var: birində 100 ml qara kofe, digərində 100 ml təmiz süd. Bir xörək qaşığı götürüb süddən kofeyə qatırsınız və qarışdırırsınız. Sonra eyni qaşıqla həmin yeni qarışıqdan bir qaşıq dolusu götürüb yenidən süd olan stəkana qaytarırsınız.<br><br>Bu əməliyyatın sonunda kofenin içindəki süd daha çoxdur, yoxsa südün içindəki kofe?', cavab: '<strong>Cavab:</strong> Tamamilə bərabərdir!<br><br><strong>İzah (Aha!):</strong> Tənliyə ehtiyac yoxdur. Prosesin sonunda hər iki stəkanda yenə də tərəzi ilə ölçülmüş kimi düz 100 ml maye var. Deməli, Kofe stəkanından kənara nə qədər kofe çıxıb əskik qalıbsa, onun yerini tamamilə o qədər süd tutub. Və həmin o "əskik kofe" mütləq digər stəkandadır. Yəni yerdəyişmə 1:1 nisbətindədir, miqdarlar bərabərdir.' }
     };
 
-    // 3. HUMANİTAR ELMLƏR (1 Dəqiqə)
     const humanitarSuallar = {
       3: { sual: 'Səfəvi hökmdarı Şah I Təhmasib 1555-ci ildə dövlətin paytaxtını uzun müddət əsas mərkəz olmuş Təbriz şəhərindən Qəzvinə köçürdü. Təbriz həm iqtisadi, həm də mədəni baxımdan Qəzvindən qat-qat inkişaf etmiş və strateji bir şəhər idi.<br><br>Sırf hərbi-coğrafi məntiqə əsaslanaraq, dövlətin bu qərarı verməsindəki əsas məqsəd nə idi?', cavab: '<strong>Cavab:</strong> Təbrizin Osmanlı sərhədinə çox yaxın olması.<br><br><strong>İzah:</strong> Çaldıran döyüşündən sonra Osmanlı ordusu dəfələrlə Təbrizi işğal etmişdi. Şah Təhmasib paytaxtı ölkənin daxilinə (Qəzvinə) çəkməklə, Osmanlı hücumu zamanı əlavə vaxt qazanmaq və qoşun toplamaq üçün strateji məsafə yaratmışdı.' },
       4: { sual: '1944-cü ildə Müttəfiq qoşunları Normandiyaya (Fransa) çıxarmazdan əvvəl, İngiltərənin başqa bir sahil bölgəsində rezin və taxtadan hazırlanmış minlərlə "saxta tank və təyyarə" yerləşdirdilər. Alman kəşfiyyat təyyarələrinin bu saxta ordunu görməsinə bilərəkdən şərait yaradılırdı.<br><br>Müttəfiqlərin bu nəhəng vizual illüziya ilə almanlara etmək istədiyi əsas hərbi-məntiqi hiylə nə idi?', cavab: '<strong>Cavab:</strong> Alman ordusunun əsas qüvvələrini yanlış istiqamətə cəlb etmək.<br><br><strong>İzah:</strong> İngilislər almanları inandırmaq istəyirdilər ki, əsas hücum başqa yerdən olacaq. Almanlar bu illüziyaya inandılar və ən güclü diviziyalarını başqa yerdə saxladılar. Nəticədə Müttəfiqlər Normandiyada daha zəif müqavimətlə qarşılaşdılar.' },
@@ -366,7 +490,6 @@
       7: { sual: '1918-ci il mayın 28-də Azərbaycan Xalq Cümhuriyyətinin İstiqlal Bəyannaməsi qəbul edildi. Lakin bu mühüm tarixi hadisə Azərbaycanın indiki hüdudları daxilində deyil, qonşu ölkənin şəhəri olan Tiflisdə (Gürcüstan) baş tutdu.<br><br>O dövrün siyasi və hərbi reallığına əsaslanaraq, Azərbaycan hökumətinin niyə öz müstəqilliyini xarici bir şəhərdə elan etməyə məcbur olduğunu necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> Bakının daşnak-bolşevik qüvvələrinin işğalı altında olması.<br><br><strong>İzah:</strong> 1918-ci ilin mayında Bakı da daxil olmaqla şərq bölgələri Stepan Şaumyanın başçılıq etdiyi Bakı XKS-nin nəzarətində idi. Təhlükəsiz mərkəz olmadığı üçün Zaqafqaziya Seyminin dağıldığı yer olan Tiflisdə müstəqillik elan edildi.' }
     };
 
-    // 4. MƏDƏNİYYƏT VƏ İNCƏSƏNƏT (1.5 Dəqiqə)
     const incesenetSuallar = {
       3: { sual: 'Azərbaycanın qədim xalçaçılıq ənənələrində dahi ustadlar ən mükəmməl simmetrik naxışları toxuyarkən bəzən xalçanın kənarında bilərəkdən kiçik bir "səhv" (məsələn, naxışın əyri olması, bir ilmənin fərqli rəngdə vurulması) edirdilər.<br><br>Mükəmməlliyə can atan sənətkarın öz şah əsərində niyə qəsdən və bilərəkdən qüsur yaratdığını fəlsəfi olaraq necə izah edərdiniz?', cavab: '<strong>Cavab:</strong> "Yalnız Yaradan mükəmməldir" inancına görə.<br><br><strong>İzah:</strong> İslam və Şərq fəlsəfəsinə görə mütləq mükəmməllik ancaq Allaha məxsusdur. İnsan öz yaratdığı əsərin qüsursuz olması iddiyasına düşməmək və təkəbbürdən uzaq olmaq üçün xalçaya bilərəkdən kiçik "noksan" qatırdı.' },
       4: { sual: 'İtalyan dahi Mikelancelonun məşhur "David" heykəlinə yaxından baxdıqda onun başı və sağ əli bədəninə nisbətdə qeyri-təbii dərəcədə böyük və kobud görünür. İnsan anatomiyasını sümük-sümük bilən Mikelancelo niyə belə bir aşkar "anatomik səhv"ə yol vermişdi?<br><br>Heykəlin ilkin dizayn məqsədinə və fizikanın optika qanunlarına əsaslanaraq bu qeyri-mütənasibliyin səbəbini tapın.', cavab: '<strong>Cavab:</strong> Perspektiv və optik illüziya.<br><br><strong>İzah:</strong> "David" heykəli yerdə deyil, kilsənin çox hündür damının kənarına yerləşdirilmək üçün sifariş edilmişdi. Optika qanunlarına görə uzaqda/yuxarıda olan obyektin yuxarı hissələri kiçik görünür. Mikelancelo bucaq distorsiyasını hesablamış, aşağıdan baxanda normal görünməsi üçün başı və əli qəsdən böyük yonmuşdu.' },
@@ -375,7 +498,6 @@
       7: { sual: '1908-ci ildə Üzeyir Hacıbəyov "Leyli və Məcnun" ilə Müsəlman Şərqində ilk operanı səhnəyə qoydu. Lakin bu əsərdə Avropa operaları üçün mütləq sayılan ənənəvi "klassik ariya" ifaları yox idi. Əvəzində aktyorlar səhnədə sırf "Muğam" oxuyurdular.<br><br>Üzeyir bəy mükəmməl Avropa təhsili almasına baxmayaraq, niyə klassik vokal ifalardan imtina edib Muğamdan istifadə etməyə məcbur olmuşdu?', cavab: '<strong>Cavab:</strong> Yerli tamaşaçını öyrəşdirmək və vokal ifaçı yoxluğu.<br><br><strong>İzah:</strong> Birincisi, Şərqdə Avropa üslubunda oxuya bilən opera müğənniləri yox idi. İkincisi, o bilirdi ki, muğama öyrəşmiş yerli tamaşaçı klassik ariyaları dərhal qəbul etməyəcək. O, "keçid" yaradaraq Avropa teatr səhnəsini doğma səslərlə (Muğam) birləşdirdi.' }
     };
 
-    // 5. TƏBİƏT ELMLƏRİ (2 Dəqiqə)
     const tebietSuallar = {
       3: { sual: 'Yorğun olanda kofe içirik və yuxumuz qaçır. Halbuki bioloji və kimyəvi olaraq kofein bədənə qətiyyən heç bir yeni enerji (kalori və ya ATP) vermir.<br><br>Bədənə heç bir enerji verməyən kofein, bizi bioloji olaraq necə "oyaq" saxlayır və yorğunluğumuzu aradan qaldırır? Kofeinin beynimizdə bağlandığı xüsusi kimyəvi maddənin adını və ya prosesi qeyd edin.', cavab: '<strong>Cavab:</strong> Kofein beyindəki "Adenozin" reseptorlarını bloklayır.<br><br><strong>İzah:</strong> İnsan oyaq qaldıqca beyində yorğunluq siqnalı verən "adenozin" adlı maddə toplanır. Kofeinin molekulyar quruluşu adenozinə o qədər bənzəyir ki, o, əsl adenozindən tez davranıb həmin reseptorlara yapışır. Beyin yorğunluq siqnalını oxuya bilmədiyi üçün bədən yorğun olmadığını zənn edir.' },
       4: { sual: 'Yağış yağarkən asfalt, torpaq və ya geydiyimiz hər hansı bir paltar islananda gözümüzə dərhal daha tünd (qara) rəngdə görünür. Halbuki təmiz su tamamilə şəffafdır və heç bir rəngi yoxdur.<br><br>Rəngsiz suyun toxunduğu səthi qaranlıq göstərməsinin arxasındakı əsas fiziki-optik qanunun/səbəbin adını yazın.', cavab: '<strong>Cavab:</strong> Sınma və Daxili İnikas (İşığın suyun daxilində tələyə düşməsi).<br><br><strong>İzah:</strong> Quru kələ-kötür səth işığı hər tərəfə yaxşı əks etdirir (açıq görünür). Su səthi isladaraq hamarlaşdırdıqda, işıq suyun içindən keçir, lakin geri qayıdarkən dəfələrlə qırılaraq su təbəqəsi daxilində udulur. Gözümüzə daha az işıq çatdığı üçün səth daha tünd görünür.' },
@@ -384,6 +506,16 @@
       7: { sual: 'Gündəlik həyatda isti və ya ilıq duş qəbul edərkən, duş kabinasının (və ya vannanın) polietilen pərdəsi həmişə havalanaraq içəriyə, yəni birbaşa sizin bədəninizə doğru yapışmağa çalışır. Halbuki aşağı axan su havanı çölə itələməlidir.<br><br>İsti su axarkən pərdəni israrla içəriyə doğru çəkən bu təzyiq fərqinin yaranmasına səbəb olan əsas fizika qanununun adını (və ya səbəbini) yazın.', cavab: '<strong>Cavab:</strong> Bernoulli prinsipi (və isti havanın yuxarı qalxması).<br><br><strong>İzah:</strong> İsti su havanı isidir və isti hava yuxarı qalxaraq aşağıda alçaq təzyiq zonası yaradır. Eyni zamanda su damcıları aşağı düşərkən havanı da özü ilə aparıb sürətləndirir (Bernoulli prinsipinə görə sürəti artan havanın təzyiqi düşür). Çöldəki yüksək təzyiqli soyuq hava isə boşluğu doldurmaq üçün pərdəni içəri doğru itələyir.' }
     };
 
+    // --- System Logic ---
+
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      document.getElementById('orb1').style.transform = `translate(${x * 1.5}px, ${y * 1.5}px)`;
+      document.getElementById('orb2').style.transform = `translate(${x * -2}px, ${y * -2}px)`;
+      document.getElementById('orb3').style.transform = `translate(${x * 1}px, ${y * -1}px)`;
+    });
+
     function initPortal() {
       const input = document.getElementById('passInput');
       const login = document.getElementById('login-screen');
@@ -391,63 +523,94 @@
       const error = document.getElementById('errorNote');
 
       if (input.value.trim() === CORRECT_PASSWORD) {
+        error.classList.remove('show-error');
         login.classList.add('hide-login');
-        setTimeout(() => { login.style.display = 'none'; main.classList.add('show-main'); }, 600);
+        setTimeout(() => { login.style.display = 'none'; main.style.display = 'block'; }, 600);
       } else {
-        error.style.display = 'block';
-        input.style.borderColor = 'rgba(251,113,133,0.8)';
-        input.animate( [ { transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(4px)' }, { transform: 'translateX(0)' } ], { duration: 380, easing: 'ease-out' } );
+        error.classList.add('show-error');
+        input.classList.remove('shake');
+        void input.offsetWidth; 
+        input.classList.add('shake');
       }
     }
 
-    function openModal(title, text) {
-      clearInterval(timerInterval); 
-      document.getElementById('modalInner').innerHTML = `<div class="modal-header"><h3>${title}</h3><p>${text}</p></div>`;
-      document.getElementById('modalFooter').innerHTML = `<button class="close-btn" onclick="closeModal()">Bağla</button>`;
-      document.getElementById('modal').classList.add('show');
+    const modalContainer = document.getElementById('modalContainer');
+    const modalCard = document.getElementById('modalCard');
+
+    function openModalRaw(htmlContent) {
+      clearInterval(timerInterval);
+      modalCard.innerHTML = htmlContent;
+      modalContainer.classList.add('show');
+    }
+
+    function closeModal() {
+      clearInterval(timerInterval);
+      modalContainer.classList.remove('show');
+      tensionMusic.pause(); // Modalı bağlayanda musiqini dayandırırıq
+      tensionMusic.currentTime = 0;
+    }
+
+    modalContainer.addEventListener('click', (e) => {
+      if (e.target === modalContainer) closeModal();
+    });
+
+    function openInfoModal() {
+      openModalRaw(`
+        <div class="modal-header">
+          <h3>Sistem Məlumatı</h3>
+          <p>Portal Statusu</p>
+        </div>
+        <div class="message glass" style="margin-bottom:20px; background: rgba(255,255,255,0.03);">
+          <p style="text-align:center;">Burada gələcəkdə komanda üzvlərinin şəxsi statistikaları, reytinq cədvəli və məşq materialları yerləşdiriləcək.</p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary" onclick="closeModal()">Bağla</button>
+        </div>
+      `);
     }
 
     function openTeamModal() {
-      clearInterval(timerInterval);
-      document.getElementById('modalInner').innerHTML = `
+      tensionMusic.pause(); // Ehtiyat olaraq başqa səhifəyə keçəndə də dayandırırıq
+      openModalRaw(`
         <div class="modal-header">
           <h3>ZƏKALARIN MÜBARİZƏSİ</h3>
-          <p>Komanda üzvləri və yarışlar</p>
+          <p>Komanda Portalı</p>
         </div>
-        <div class="modal-top">
-          <div class="modal-image">
-            <img src="uzvler.jpg" alt="Komanda üzvləri" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231f2937\'/%3E%3C/svg%3E'">
+        <div class="team-grid">
+          <div class="team-image-box">
+            <img src="uzvler.jpg" alt="Komanda üzvləri" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231e293b\'/%3E%3C/svg%3E'">
           </div>
-          <div class="modal-side">
-            <h3>KOMANDA ÜZVLƏRİ</h3>
-            <div class="members">
-              <div class="member">Qardaşəli İbrahimli</div>
-              <div class="member">Fariz İmanlı</div>
-              <div class="member">Ravin Qasımov</div>
-              <div class="member">Ayan Rəsulzadə</div>
-              <div class="member">Ləman Cəfərova</div>
-              <div class="member">Kənan Səfərov</div>
+          <div>
+            <div class="team-info"><h3>Aktiv İştirakçılar</h3></div>
+            <div class="members-list">
+              <div class="member-tag">Qardaşəli İbrahimli</div>
+              <div class="member-tag">Fariz İmanlı</div>
+              <div class="member-tag">Ravin Qasımov</div>
+              <div class="member-tag">Ayan Rəsulzadə</div>
+              <div class="member-tag">Ləman Cəfərova</div>
+              <div class="member-tag">Kənan Səfərov</div>
             </div>
-            <div class="race-section">
-              <h4>YARIŞLAR</h4>
-              <div class="race-list">
-                <div class="race" onclick="openRace1Panel()">Yarış 1</div>
-                <div class="race">Yarış 2</div>
-                <div class="race">Yarış 3</div>
-                <div class="race">Yarış 4</div>
-                <div class="race">Yarış 5</div>
-              </div>
+            
+            <div class="team-info"><h3>Yarış Sessiyaları</h3></div>
+            <div class="race-list">
+              <button class="race-btn active" onclick="openRace1Panel()">Yarış 1</button>
+              <button class="race-btn">Yarış 2</button>
+              <button class="race-btn">Yarış 3</button>
+              <button class="race-btn">Yarış 4</button>
+              <button class="race-btn">Yarış 5</button>
             </div>
           </div>
         </div>
-      `;
-      document.getElementById('modalFooter').innerHTML = `<button class="close-btn" onclick="closeModal()">Bağla</button>`;
-      document.getElementById('modal').classList.add('show');
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeModal()">Sistemə Qayıt</button>
+        </div>
+      `);
     }
 
+    // --- ORİJİNAL KATEQORİYA (YARIŞ 1) FORMASI QAYTARILDI ---
     function openRace1Panel() {
-      clearInterval(timerInterval);
-      document.getElementById('modalInner').innerHTML = `
+      tensionMusic.pause();
+      openModalRaw(`
         <div class="modal-header">
           <h3>ZƏKALARIN MÜBARİZƏSİ</h3>
           <p>Yarış 1 • Kateqoriya paneli</p>
@@ -511,106 +674,85 @@
           </div>
 
         </div>
-      `;
-      document.getElementById('modalFooter').innerHTML = `
-        <button class="ghost-btn" style="border:1px solid #fff" onclick="openTeamModal()">Geri Qayıt</button>
-        <button class="close-btn" onclick="closeModal()">Bağla</button>
-      `;
-      document.getElementById('modal').classList.add('show');
+
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="openTeamModal()">Geri</button>
+          <button class="btn-primary" onclick="closeModal()">Bağla</button>
+        </div>
+      `);
     }
 
     function openQuestionModal(category, points) {
-      clearInterval(timerInterval); 
-      
-      let qData;
-      let titleName;
-      let timeLimit; 
-      
-      if (category === 'riyaziyyat') {
-          qData = riyaziyyatSuallar[points];
-          titleName = "RİYAZİYYAT VƏ MƏNTİQ";
-          timeLimit = 120; // 2 Dəqiqə
-      } else if (category === 'reqemsal') {
-          qData = reqemsalSuallar[points];
-          titleName = "RƏQƏMSAL BACARIQLAR";
-          timeLimit = 120; // 2 Dəqiqə
-      } else if (category === 'humanitar') {
-          qData = humanitarSuallar[points];
-          titleName = "HUMANİTAR ELMLƏR (TARİX)";
-          timeLimit = 90;  // 1 Dəqiqə
-      } else if (category === 'incesenet') {
-          qData = incesenetSuallar[points];
-          titleName = "MƏDƏNİYYƏT VƏ İNCƏSƏNƏT";
-          timeLimit = 90;  // 1.5 Dəqiqə
-      } else if (category === 'tebiet') {
-          qData = tebietSuallar[points];
-          titleName = "TƏBİƏT ELMLƏRİ";
-          timeLimit = 120; // 2 Dəqiqə
-      }
-      
-      document.getElementById('modalInner').innerHTML = `
+      let qData, titleName, timeLimit; 
+
+      if (category === 'riyaziyyat') { qData = riyaziyyatSuallar[points]; titleName = "RİYAZİYYAT VƏ MƏNTİQ"; timeLimit = 120; } 
+      else if (category === 'reqemsal') { qData = reqemsalSuallar[points]; titleName = "RƏQƏMSAL BACARIQLAR"; timeLimit = 120; } 
+      else if (category === 'humanitar') { qData = humanitarSuallar[points]; titleName = "HUMANİTAR ELMLƏR"; timeLimit = 90; } 
+      else if (category === 'incesenet') { qData = incesenetSuallar[points]; titleName = "MƏDƏNİYYƏT VƏ İNCƏSƏNƏT"; timeLimit = 90; } 
+      else if (category === 'tebiet') { qData = tebietSuallar[points]; titleName = "TƏBİƏT ELMLƏRİ"; timeLimit = 120; }
+
+      openModalRaw(`
         <div class="modal-header">
-          <h3>${titleName} - ${points} BAL</h3>
-          <div class="timer" id="questionTimer">--:--</div>
+          <h3>${titleName} • ${points} BAL</h3>
+          <div class="q-timer" id="questionTimer">--:--</div>
         </div>
-
-        <div class="question-box">
-          <p class="question-text">${qData.sual}</p>
-        </div>
-
-        <div class="answer-box" id="answerBox">
-          <h4 class="answer-title">Cavab və Məntiqi İzah:</h4>
+        <div class="q-text-box">${qData.sual}</div>
+        <div class="a-text-box" id="answerBox">
+          <h4>Məntiqi İzah:</h4>
           <p>${qData.cavab}</p>
         </div>
-
-        <div style="text-align:center; margin-top:20px;">
-          <button class="solid-btn" id="showAnswerBtn" onclick="showAnswer()">Cavabı İndi Göstər</button>
+        <div class="modal-actions">
+          <button class="btn-primary" id="showAnswerBtn" onclick="showAnswer()">Cavabı Göstər</button>
+          <button class="btn-secondary" onclick="openRace1Panel()">Kateqoriyalar</button>
         </div>
-      `;
+      `);
+
+      startTimer(timeLimit);
       
-      document.getElementById('modalFooter').innerHTML = `
-        <button class="ghost-btn" style="border:1px solid #fff" onclick="openRace1Panel()">Kateqoriyalara Qayıt</button>
-        <button class="close-btn" onclick="closeModal()">Bağla</button>
-      `;
+      // Səs faylını başladırıq (Audio bloku bəzi tarayıcılarda user click olmadan işləmir, amma modal clicklə açıldığı üçün icazə veriləcək)
+      tensionMusic.currentTime = 0;
+      tensionMusic.play().catch(e => console.log("Musiqi çalınması tarayıcı tərəfindən bloklandı", e));
+    }
+
+    function startTimer(seconds) {
+      let timeLeft = seconds;
+      const timerEl = document.getElementById('questionTimer');
       
-      let timeLeft = timeLimit; 
-      let mInit = Math.floor(timeLeft / 60);
-      let sInit = timeLeft % 60;
-      document.getElementById('questionTimer').innerText = 
-          (mInit < 10 ? '0' + mInit : mInit) + ':' + (sInit < 10 ? '0' + sInit : sInit);
-          
-      timerInterval = setInterval(() => {
-        timeLeft--;
+      const updateDisplay = () => {
         let m = Math.floor(timeLeft / 60);
         let s = timeLeft % 60;
-        document.getElementById('questionTimer').innerText = 
-          (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-        
+        timerEl.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+      };
+      
+      updateDisplay();
+      
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
-          document.getElementById('questionTimer').style.color = '#fff';
-          document.getElementById('questionTimer').style.background = '#ef4444';
-          document.getElementById('questionTimer').innerText = "VAXT BİTDİ!";
-          showAnswer(); 
+          timerEl.classList.add('time-up');
+          timerEl.innerText = "VAXT BİTDİ!";
+          showAnswer();
         }
       }, 1000);
     }
 
     function showAnswer() {
-      clearInterval(timerInterval); 
-      document.getElementById('answerBox').style.display = 'block';
-      let btn = document.getElementById('showAnswerBtn');
-      if(btn) btn.style.display = 'none'; 
+      clearInterval(timerInterval);
+      tensionMusic.pause(); // Cavab açılanda musiqi dayanır
+      const ansBox = document.getElementById('answerBox');
+      const btn = document.getElementById('showAnswerBtn');
+      if (ansBox) ansBox.style.display = 'block';
+      if (btn) btn.style.display = 'none';
+      document.getElementById('modalCard').scrollTo({ top: document.getElementById('modalCard').scrollHeight, behavior: 'smooth' });
     }
 
-    function closeModal() {
-      clearInterval(timerInterval); 
-      document.getElementById('modal').classList.remove('show');
-    }
-
-    document.getElementById('passInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') initPortal(); });
-    document.getElementById('passInput').addEventListener('input', function() { document.getElementById('errorNote').style.display = 'none'; this.style.borderColor = 'rgba(255,255,255,0.10)'; });
-    document.getElementById('modal').addEventListener('click', function(e) { if (e.target.id === 'modal') closeModal(); });
+    document.getElementById('passInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') initPortal(); });
+    document.getElementById('passInput').addEventListener('input', function() { 
+      document.getElementById('errorNote').classList.remove('show-error');
+      this.classList.remove('shake');
+    });
   </script>
 </body>
 </html>
